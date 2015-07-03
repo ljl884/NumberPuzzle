@@ -1,6 +1,7 @@
 #include "LevelManager.h"
 #include "Helper.h"
 #include "MainScene.h"
+
 LevelManager::LevelManager(MainScene* parent)
 {
 	this->parent = parent;
@@ -30,10 +31,15 @@ void LevelManager::initLevels()
 	levelInfo.push_back("17,-2,1#4,1,-1,1#2,1,0,1#23,1,1#4,1,2,1#1,1,-2,0#2,2,-1,0#3,2,0,0#1,2,1,0#8,1,2,0#5,1,-2,-1#2,1,-1,-1#18,0,-1#4,1,1,-1#3,1,2,-1#3,1,-1,-2#7,1,0,-2#1,1,1,-2#2,1,2,-2");
 	levelInfo.push_back("4,1,-1,0#5,2,0,0#8,2,1,0#28,2,0#26,-2,-1#2,2,-1,-1#3,2,0,-1#7,2,1,-1");
 	levelInfo.push_back("4,1,-1,2#28,0,2#2,1,-1,1#3,1,0,1#1,1,1,1#7,2,-1,0#5,2,1,0#4,1,2,0#2,2,-1,-1#1,2,0,-1#3,3,1,-1#23,2,-1#22,-1,-2#6,2,0,-2#4,2,1,-2");
+	levelInfo.push_back("14,-2,0#4,2,-1,0#3,2,0,0#2,1,1,0#1,1,2,0#27,-2,-1#4,3,-1,-1#3,3,0,-1#2,1,1,-1#1,1,2,-1");
+	levelInfo.push_back("2,1,0,2#17,-1,1#1,1,0,1#24,1,1#5,1,2,1#2,3,-1,0#7,3,0,0#2,2,1,0#1,1,2,0#1,3,-1,-1#4,3,0,-1#22,1,-1#3,1,0,-2#5,1,1,-2");
+	levelInfo.push_back("5,1,-1,1#17,0,1#3,1,1,1#4,2,-1,0#-2,3,0,0#8,3,1,0#-4,1,2,0#18,-1,-1#7,2,0,-1#1,2,1,-1#11,2,-1");
+	levelInfo.push_back("4,2,-2,1#9,2,-1,1#7,3,0,1#46,1,1#6,2,-2,0#40,-1,0#3,2,0,0#1,2,1,0#8,1,-2,-1#2,1,-1,-1#5,1,0,-1#4,1,1,-1");
+	levelInfo.push_back("9,0,1#2,3,1,1#1,3,2,1#11,-1,0#1,3,0,0#-1,4,1,0#4,3,2,0#7,1,-1,-1#2,2,0,-1#5,1,1,-1#16,2,-1");
 }
 void LevelManager::runLevel(int levelNumber)
 {
-	
+
 	if (levelNumber >= levelInfo.size() || levelNumber < 0)
 		return; 
 
@@ -48,6 +54,7 @@ void LevelManager::runLevel(int levelNumber)
 		createLevel(table, levelInfo.at(levelNumber));
 		currentLevel = levelNumber;
 		currentTable = table;
+		parent->setLevelNumber(currentLevel + 1);
 	}
 	
 }
