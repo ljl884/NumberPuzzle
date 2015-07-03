@@ -20,8 +20,10 @@ public:
 	void nextLevelCallback(Ref* sender);
 	void backLevelCallback(Ref* sender);
 	void onLevelComplete();
+	void setLevelNumber(int levelNumber);
 private:
 	LevelManager* levelManager;
+	Label* levelNumberLabel;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

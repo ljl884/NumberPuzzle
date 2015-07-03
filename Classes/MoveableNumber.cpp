@@ -4,8 +4,7 @@
 
 MoveableNumber::MoveableNumber(int value)
 {
-	if (value < 0)
-		return;
+	
 	this->value = value;
 	
 
@@ -41,7 +40,12 @@ void MoveableNumber::update()
 	Number::update();
 	if (this->value < 0)
 	{
-		this->addChild(Sprite::create("frame_0_wrong@2x.png"));
+		//this->addChild(Sprite::create("frame_0_wrong@2x.png"));
+		container->setTexture("frame_0_wrong@2x.png");
+	}
+	if (this->value > 0)
+	{
+		container->setTexture("level_incomplete_default@2x.png");
 	}
 	if (this->value == 0)
 	{

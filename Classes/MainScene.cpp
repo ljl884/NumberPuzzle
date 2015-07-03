@@ -4,6 +4,7 @@
 #include "StaticNumber.h"
 #include "MoveableNumber.h"
 #include "Table.h"
+#include "Helper.h"
 
 USING_NS_CC;
 
@@ -39,8 +40,13 @@ bool MainScene::init()
     addChild(rootNode);
 	this->setTouchEnabled(true);
 
+	this->levelNumberLabel = Label::create(Helper::int2str(1), "Marker Felt.ttf", 35);
+	levelNumberLabel->setPosition(480, 600);
+	this->addChild(levelNumberLabel);
+
 	this->levelManager = new LevelManager(this);
 	levelManager->runLevel(0);
+	
 
 	Menu * menu = Menu::create();
 	MenuItemImage* restItem = MenuItemImage::create(
@@ -76,4 +82,7 @@ void MainScene::backLevelCallback(Ref* sender){
 void MainScene::onLevelComplete()
 {
 	//this->levelManager->nextLevel();
+}
+void MainScene::setLevelNumber(int levelNumber){
+	levelNumberLabel->setString(Helper::int2str(levelNumber));
 }

@@ -105,10 +105,13 @@ bool Table::onTouchBegan(Touch* touch, Event* event){
 	Point position = this->convertToNodeSpace(touch->getLocation());
 	for (int i = 0; i < moveableNumbers.size();i++){
 		MoveableNumber *number = moveableNumbers.at(i);
+		
 		Rect *rect = new Rect(number->getPosition().x - number->getContainerSize().width*SCALE/2,
 			number->getPosition().y - number->getContainerSize().height*SCALE/2,
 			number->getContainerSize().width*SCALE, number->getContainerSize().height*SCALE);
 		if (rect->containsPoint(position)){
+			if (number->isFinished())
+				return false;
 			number->setHighlight(true);
 			currentNumber = number;
 			orignTouchLocation = position;

@@ -3,7 +3,7 @@
 #define _NUMBER_
 #include "cocos2d.h"
 
-#define MAX_LEVEL 3
+#define MAX_LEVEL 4
 #define SCALE 1
 
 USING_NS_CC;

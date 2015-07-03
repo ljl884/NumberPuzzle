@@ -4,7 +4,7 @@
 
 StaticNumber::StaticNumber(int value, int level)
 {
-	if (value < 0 || level == 0 || level>MAX_LEVEL)
+	if ( level == 0 || level>MAX_LEVEL)
 		return;
 	this->level = level;
 	this->value = value;
@@ -34,6 +34,8 @@ void StaticNumber::setContainer(int level)
 	case 3:
 		this->container->setTexture("frame_3@2x.png");
 		break;
+	case 4:
+		this->container->setTexture("frame_4@2x.png");
 	default:
 		break;
 	}
