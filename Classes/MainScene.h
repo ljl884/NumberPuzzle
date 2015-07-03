@@ -2,8 +2,9 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "LevelManager.h"
 
-class HelloWorld : public cocos2d::Layer
+class MainScene : public cocos2d::Layer
 {
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -13,7 +14,14 @@ public:
     virtual bool init();
 
     // implement the "static create()" method manually
-    CREATE_FUNC(HelloWorld);
+	CREATE_FUNC(MainScene);
+
+	void resetLevelCallback(Ref* sender);
+	void nextLevelCallback(Ref* sender);
+	void backLevelCallback(Ref* sender);
+	void onLevelComplete();
+private:
+	LevelManager* levelManager;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

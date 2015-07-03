@@ -7,5 +7,10 @@ USING_NS_CC;
 class StaticNumber :public Number{
 public:
 	StaticNumber(int value,int level);
+	void decreaseLevel();
+	virtual bool coverable();
+	virtual void update();
+private:
+	void setContainer(int level);
 };
 #endif

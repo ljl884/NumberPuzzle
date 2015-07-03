@@ -8,7 +8,9 @@ class MoveableNumber :public Number{
 public:
 	MoveableNumber(int value);
 	void setHighlight(bool highlight);
-
+	virtual bool coverable();
+	virtual void update();
+	inline bool isFinished(){ return this->finished; }
 
 private:
 	bool finished;

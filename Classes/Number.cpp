@@ -1,5 +1,6 @@
 /*Written by Wentao Li*/
 #include "Number.h"
+#include "Helper.h"
 #define APPEAR_ANIMATION_TIME 0.3
 
 
@@ -17,4 +18,15 @@ void Number::playAppearAnimation(float Delay)
 }
 Size Number::getContainerSize(){
 	return this->container->getContentSize();
+}
+
+bool Number::coverable()
+{
+	return false;
+}
+void Number::update()
+{
+	numberLabel->setString(Helper::int2str(this->value));
+	numberLabel->runAction(Sequence::create(
+		ScaleTo::create(0.1, 3), ScaleTo::create(0.1, 1), NULL));
 }

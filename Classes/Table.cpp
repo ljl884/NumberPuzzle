@@ -1,9 +1,12 @@
 /*Written by Wentao Li*/
 #include "Table.h"
+#include "MoveManager.h"
+#include "Number.h"
 #include "MoveableNumber.h"
 #include "StaticNumber.h"
+#include "MainScene.h"
 
-Table::Table(Node* parent)
+Table::Table(MainScene* parent)
 {
 	this->parent = parent;
 	this->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
@@ -11,6 +14,7 @@ Table::Table(Node* parent)
 	MoveableNumberCount = 0;
 	StaticNumberCount = 0;
 	currentNumber = nullptr;
+	this->moveManager = new MoveManager(this);
 }
 
 //Attach touch listener to table layer, enable it to handle touch events
@@ -21,6 +25,28 @@ void Table::initListener()
 	touchListener->onTouchMoved = CC_CALLBACK_2(Table::onTouchMoved, this);
 	touchListener->onTouchEnded = CC_CALLBACK_2(Table::onTouchEnded, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
+}
+bool Table::checkFinish()
+{
+	for (MoveableNumber* number : moveableNumbers){
+		if (!number->isFinished())
+			return false;
+	}
+
+	parent->onLevelComplete();
+	return true;
+}
+Number* Table::getNumberByLogicPosition(Point logicPosition){
+	for (MoveableNumber *number : moveableNumbers){
+		if (logicPosition.equals(number->getLogicPosition()))
+			return number;
+	}
+	for (StaticNumber *number : staticNumbers){
+		if (logicPosition.equals(number->getLogicPosition()))
+			return number;
+	}
+	
+	return nullptr;
 }
 
 //Receives logic position and returns the world position
@@ -85,12 +111,37 @@ bool Table::onTouchBegan(Touch* touch, Event* event){
 		if (rect->containsPoint(position)){
 			number->setHighlight(true);
 			currentNumber = number;
+			orignTouchLocation = position;
 		}
 	}
 	return true;
 }
 void Table::onTouchMoved(Touch* touch, Event* event){
-
+	if (currentNumber == nullptr)
+		return;
+	Point position = this->convertToNodeSpace(touch->getLocation());
+	Point currentNumberPosition = logicPositionToRealPosition(currentNumber->getLogicPosition());
+	if ((position.x - currentNumberPosition.x) > X_ALIGN / 2)
+	{
+		moveManager->attemptMove(RIGHT, currentNumber);
+		return;
+	}
+	if ((position.x - currentNumberPosition.x) < ((0 - X_ALIGN) / 2))
+	{
+		moveManager->attemptMove(LEFT, currentNumber);
+		return;
+	}
+	if ((position.y - currentNumberPosition.y) > ( Y_ALIGN / 2))
+	{
+		moveManager->attemptMove(UP, currentNumber);
+		return;
+	}
+	if ((position.y - currentNumberPosition.y) < ((0 - Y_ALIGN) / 2))
+	{
+		moveManager->attemptMove(DOWN, currentNumber);
+		return;
+	}
+	
 }
 void Table::onTouchEnded(Touch* touch, Event* event){
 	if (currentNumber == nullptr)

@@ -6,7 +6,7 @@ MoveableNumber::MoveableNumber(int value)
 {
 	if (value < 0)
 		return;
-
+	this->value = value;
 	
 
 	//Init Container
@@ -32,3 +32,20 @@ void MoveableNumber::setHighlight(bool highlight){
 	this->highlighted = highlight;
 }
 
+bool MoveableNumber::coverable()
+{
+	return false;
+}
+void MoveableNumber::update()
+{
+	Number::update();
+	if (this->value < 0)
+	{
+		this->addChild(Sprite::create("frame_0_wrong@2x.png"));
+	}
+	if (this->value == 0)
+	{
+		finished = true;
+		this->addChild(Sprite::create("frame_0_completed@2x.png"));
+	}
+}
