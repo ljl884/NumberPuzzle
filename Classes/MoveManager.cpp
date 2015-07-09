@@ -11,6 +11,8 @@ bool MoveManager::attemptMove(Direction direction, MoveableNumber* moveableNumbe
 {
 	if (moveableNumber == nullptr)
 		return false;
+	if (moveableNumber->isFinished())
+		return false;
 	Point logicPosition = moveableNumber->getLogicPosition();
 	Point destinationPosition;
 	switch (direction)

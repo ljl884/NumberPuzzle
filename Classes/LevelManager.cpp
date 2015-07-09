@@ -1,15 +1,18 @@
 #include "LevelManager.h"
 #include "Helper.h"
 #include "MainScene.h"
-
-LevelManager::LevelManager(MainScene* parent)
+LevelManager* LevelManager::instance = nullptr;
+LevelManager::LevelManager()
 {
-	this->parent = parent;
+	parent = nullptr;
 	currentTable = nullptr;
 	currentLevel = 0;
 	initLevels();
 	
 	
+}
+void LevelManager::setParent(MainScene* parent){
+	this->parent = parent;
 }
 void LevelManager::initLevels()
 {
@@ -36,10 +39,16 @@ void LevelManager::initLevels()
 	levelInfo.push_back("5,1,-1,1#17,0,1#3,1,1,1#4,2,-1,0#-2,3,0,0#8,3,1,0#-4,1,2,0#18,-1,-1#7,2,0,-1#1,2,1,-1#11,2,-1");
 	levelInfo.push_back("4,2,-2,1#9,2,-1,1#7,3,0,1#46,1,1#6,2,-2,0#40,-1,0#3,2,0,0#1,2,1,0#8,1,-2,-1#2,1,-1,-1#5,1,0,-1#4,1,1,-1");
 	levelInfo.push_back("9,0,1#2,3,1,1#1,3,2,1#11,-1,0#1,3,0,0#-1,4,1,0#4,3,2,0#7,1,-1,-1#2,2,0,-1#5,1,1,-1#16,2,-1");
+	levelInfo.push_back("4,2,-1,2#1,1,0,2#3,2,1,2#4,1,2,2#1,1,-1,1#16,0,1#3,2,1,1#2,2,2,1#3,2,-1,0#26,0,0#22,1,0#2,2,2,0#4,2,-1,-1#2,2,0,-1#2,2,1,-1#4,2,2,-1");
+	levelInfo.push_back("3,1,-2,1#5,1,-1,1#1,2,0,1#2,2,1,1#8,1,2,1#1,1,-2,0#34,-1,0#4,3,0,0#3,2,1,0#7,2,2,0#2,1,-2,-1#5,2,-1,-1#3,3,0,-1#20,1,-1#22,2,-1");
+	levelInfo.push_back("5,1,-3,2#42,-2,2#9,2,-1,2#3,2,0,2#4,1,1,2#7,1,2,2#3,1,-3,1#4,2,-2,1#7,2,-1,1#2,2,0,1#33,1,1#3,1,2,1#2,1,-2,0#25,-1,0#4,2,0,0#5,1,1,0#2,1,2,0#5,1,-2,-1#6,1,-1,-1#1,1,0,-1");
+	levelInfo.push_back("4,2,-2,1#1,2,-1,1#9,2,0,1#1,2,1,1#7,2,2,1#3,2,-2,0#44,-1,0#35,0,0#25,1,0#2,2,2,0#8,2,-2,-1#2,2,-1,-1#5,2,0,-1#6,2,1,-1#4,2,2,-1");
+	levelInfo.push_back("8,-1,1#1,2,0,1#2,2,1,1#9,-2,0#5,1,-1,0#3,3,0,0#1,3,1,0#4,2,-2,-1#2,3,-1,-1#-2,4,0,-1#12,1,-1#14,-1,-2#4,3,0,-2#1,2,1,-2");
 }
 void LevelManager::runLevel(int levelNumber)
 {
-
+	if (parent == nullptr)
+		return;
 	if (levelNumber >= levelInfo.size() || levelNumber < 0)
 		return; 
 
@@ -60,14 +69,20 @@ void LevelManager::runLevel(int levelNumber)
 }
 void LevelManager::resetLevel()
 {
+	if (parent == nullptr)
+		return;
 	runLevel(currentLevel);
 }
 void LevelManager::nextLevel()
 {	
+	if (parent == nullptr)
+		return;
 	runLevel(currentLevel+1);
 }
 void LevelManager::lastLevel()
 {
+	if (parent == nullptr)
+		return;
 	runLevel(currentLevel -1);
 }
 

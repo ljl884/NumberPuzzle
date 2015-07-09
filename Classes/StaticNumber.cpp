@@ -1,6 +1,6 @@
 /*Written by Wentao Li*/
 #include "StaticNumber.h"
-#include "Helper.h"
+
 
 StaticNumber::StaticNumber(int value, int level)
 {

@@ -6,12 +6,20 @@ USING_NS_CC;
 class MainScene;
 class LevelManager{
 public:
-	LevelManager(MainScene * parent);
+	
+	static LevelManager* getInstance(){
+		if (instance == nullptr)
+			instance = new LevelManager();
+		return instance;
+	}
+	void setParent(MainScene * parent);
 	void runLevel(int levelNumber);
 	void resetLevel();
 	void nextLevel();
 	void lastLevel();
 private:
+	static LevelManager* instance;
+	LevelManager();
 	std::vector<std::string> levelInfo;
 	MainScene* parent;
 	Table* currentTable;

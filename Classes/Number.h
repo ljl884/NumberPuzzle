@@ -2,6 +2,7 @@
 #ifndef _NUMBER_
 #define _NUMBER_
 #include "cocos2d.h"
+#include "Helper.h"
 
 #define MAX_LEVEL 4
 #define SCALE 1
