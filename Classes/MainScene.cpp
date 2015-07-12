@@ -64,9 +64,14 @@ bool MainScene::init()
 	MenuItemImage* selectLevelItem = MenuItemImage::create(
 		"select_level_selected@3x.png", "select_level_default@3x.png", 
 		CC_CALLBACK_1(MainScene::selectLevelCallback,this));
+	MenuItemImage* undoItem = MenuItemImage::create(
+		"undo_default@3x.png", "undo_selected@3x.png",
+		CC_CALLBACK_1(MainScene::undoCallback, this));
 
 	menu->addChild(restItem);
 	menu->addChild(selectLevelItem);
+	menu->addChild(undoItem);
+	undoItem->setPosition(50, 50);
 	restItem->setPosition(900, 50);	
 	selectLevelItem->setPosition(50, 600);
 	if (DEBUG){
@@ -102,8 +107,12 @@ void MainScene::backLevelCallback(Ref* sender){
 void MainScene::selectLevelCallback(Ref* sender){
 	Director::sharedDirector()->replaceScene(TransitionFade::create(0.5,LevelSelectionScene::createScene()));
 }
+void MainScene::undoCallback(Ref* sender){
+	this->levelManager->undo();
+}
 void MainScene::onLevelComplete()
 {
+	levelManager->completeCurrentLevel();
 	levelCompleteLayer->show();
 }
 void MainScene::setLevelNumber(int levelNumber){

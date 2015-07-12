@@ -8,7 +8,7 @@ LevelManager::LevelManager()
 	currentTable = nullptr;
 	currentLevel = 0;
 	initLevels();
-
+	initUserData();
 
 		
 }
@@ -30,7 +30,7 @@ void LevelManager::initLevels()
 	levelInfo.push_back("10,0,1#3,1,1,1#30,-2,0#5,1,-1,0#7,1,0,0#4,2,1,0#5,1,2,0#3,1,-1,-1#1,2,0,-1#2,2,1,-1#3,1,2,-1");
 	levelInfo.push_back("4,1,-1,1#2,1,0,1#1,1,1,1#8,1,-1,0#24,0,0#5,1,1,0#2,1,-1,-1#15,0,-1#3,1,1,-1#7,1,-1,-2#1,1,0,-2#6,1,1,-2");
 	levelInfo.push_back("4, 3, 0, 0#3, 1, -1, 0#1, 1, -1, 1#5, 2, 0, 1#2, 2, 1, 0#3, 1, 0, -1#12, 1, -1#10, -2, 0#11, 0, 2");
-	levelInfo.push_back("18,0,2#8,1,0,1#2,1,-1,0#5,2,0,0#16,1,0#1,2,0,-1#4,1,1,-1#3,2,0,-2#7,1,1,-2#11,0,-3");
+	levelInfo.push_back("18,2,0#8,1,1,0#2,1,0,-1#5,3,0,0#16,0,1#1,3,-1,0#4,1,-1,1#3,2,-2,0#7,1,-2,1#11,-3,0");
 	levelInfo.push_back("3,1,-1,1#11,0,1#15,1,1#2,1,2,1#4,1,-1,0#5,2,0,0#3,3,1,0#1,2,2,0#2,1,-1,-1#6,1,0,-1#3,1,1,-1#5,1,2,-1#1,1,-1,-2#27,0,-2#2,1,1,-2#4,1,2,-2");
 	levelInfo.push_back("17,-2,1#4,1,-1,1#2,1,0,1#23,1,1#4,1,2,1#1,1,-2,0#2,2,-1,0#3,2,0,0#1,2,1,0#8,1,2,0#5,1,-2,-1#2,1,-1,-1#18,0,-1#4,1,1,-1#3,1,2,-1#3,1,-1,-2#7,1,0,-2#1,1,1,-2#2,1,2,-2");
 	levelInfo.push_back("4,1,-1,0#5,2,0,0#8,2,1,0#28,2,0#26,-2,-1#2,2,-1,-1#3,2,0,-1#7,2,1,-1");
@@ -62,6 +62,41 @@ void LevelManager::initLevels()
 	levelInfo.push_back("12,0,1#3,2,1,1#1,2,2,1#19,-1,0#-5,4,0,0#7,4,1,0#4,3,2,0#8,1,-1,-1#-3,4,0,-1#2,3,1,-1#3,2,2,-1#4,2,0,-2#13,1,-2");
 	levelInfo.push_back("4,1,-1,1#1,2,0,1#20,1,1#4,1,2,1#5,1,-2,0#30,-1,0#2,3,0,0#3,4,1,0#1,2,2,0#5,1,-2,-1#1,2,-1,-1#2,3,0,-1#3,4,1,-1#4,1,-1,-2#16,0,-2#1,2,1,-2");
 	levelInfo.push_back("1,1,-2,1#25,-1,1#1,2,0,1#14,1,1#1,1,2,1#3,2,-2,0#2,2,-1,0#1,4,0,0#2,3,1,0#3,3,2,0#3,2,-2,-1#2,3,-1,-1#1,4,0,-1#2,3,1,-1#3,3,2,-1#1,1,-2,-2#12,-1,-2#1,1,0,-2#16,1,-2#1,1,2,-2");
+}
+void LevelManager::initUserData(){
+	levelCompleted.clear();
+	UserDefault* userData = UserDefault::sharedUserDefault();
+	for (int i = 0; i < levelInfo.size(); i++){
+		bool Completed  = userData->getBoolForKey(Helper::int2str(i).c_str(), false);
+		levelCompleted[i] = Completed;
+	}
+}
+bool LevelManager::isLevelCompleted(int levelNumber)
+{
+	if (levelNumber < 0 || levelNumber >= levelCompleted.size())
+		return false;
+	else{
+		
+		return levelCompleted[levelNumber];
+	}
+		
+
+}
+void LevelManager::completeCurrentLevel(){
+	bool currentLevelCompleted = isLevelCompleted(currentLevel);
+	if (currentLevelCompleted == false)
+	{
+		levelCompleted[currentLevel] = true;
+		UserDefault::sharedUserDefault()->setBoolForKey(Helper::int2str(currentLevel).c_str(), true);
+	}
+}
+void LevelManager::resetUserData(){
+	levelCompleted.clear();
+	UserDefault* userData = UserDefault::sharedUserDefault();
+	for (int i = 0; i < levelInfo.size(); i++){
+		userData->setBoolForKey(Helper::int2str(i).c_str(), false);
+		levelCompleted[i] = false;
+	}
 }
 void LevelManager::runLevel(int levelNumber)
 {
@@ -103,7 +138,9 @@ void LevelManager::lastLevel()
 		return;
 	runLevel(currentLevel -1);
 }
-
+void LevelManager::undo(){
+	currentTable->undo();
+}
 void LevelManager::createLevel(Table* table,std::string levelInfo)
 {
 	std::vector<std::string> strings;

@@ -1,20 +1,21 @@
 #ifndef _MOVE_MANAGER_
 #define _MOVE_MANAGER_
 #include "cocos2d.h"
+#include "Move.h"
 USING_NS_CC;
 class Table;
 class MoveableNumber;
 class StaticNumber;
-enum Direction{
-	LEFT, RIGHT, UP, DOWN
-};
+
 class MoveManager
 {
 public:
 	MoveManager(Table* table);
+	~MoveManager();
 	bool attemptMove(Direction direction, MoveableNumber* moveableNumber);
-private:
-	void doMove(Direction direction, MoveableNumber* moveableNumber, StaticNumber* staticNumber);
+	bool undoMove();
+private:	
 	Table* table;
+	std::stack<Move*> *moveHistory;
 };
 #endif

@@ -22,6 +22,7 @@ public:
 	void nextLevelCallback(Ref* sender);
 	void backLevelCallback(Ref* sender);
 	void selectLevelCallback(Ref* sender);
+	void undoCallback(Ref* sender);
 	void onLevelComplete();
 	void setLevelNumber(int levelNumber);
 private:

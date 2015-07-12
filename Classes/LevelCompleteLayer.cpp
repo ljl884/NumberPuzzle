@@ -1,6 +1,7 @@
 #include "LevelCompleteLayer.h"
 #include "MainScene.h"
 LevelCompleteLayer::LevelCompleteLayer(MainScene* parent){
+	
 	background = Sprite::create("level_complete_default@3x.png");
 	background->setScaleX(4);
 	background->setScaleY(3);
@@ -18,6 +19,7 @@ LevelCompleteLayer::LevelCompleteLayer(MainScene* parent){
 	nextLevel->setPosition(90, -100);
 	menu = Menu::create(levelSelection, resetLevel, nextLevel,NULL);
 	menu->setPosition(0, 0);
+	menu->setEnabled(false);
 	this->setZOrder(5);
 	this->addChild(background);
 	this->addChild(label);
@@ -29,12 +31,14 @@ LevelCompleteLayer::LevelCompleteLayer(MainScene* parent){
 }
 
 void LevelCompleteLayer::show(){
+	menu->setEnabled(true);
 	Action* action = Sequence::create(DelayTime::create(0.5), FadeIn::create(0.5), NULL);
 	background->runAction(action);
 	label->runAction(action->clone());
 	menu->runAction(action->clone());
 }
 void LevelCompleteLayer::hide(){
+	menu->setEnabled(false);
 	Action* action = Sequence::create(FadeOut::create(0.5), NULL);
 	background->runAction(action);
 	label->runAction(action->clone());

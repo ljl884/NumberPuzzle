@@ -16,5 +16,6 @@ private:
 	bool finished;
 	bool highlighted;
 	Sprite* highlightedContainer;
+	Sprite* finishContainer;
 };
 #endif

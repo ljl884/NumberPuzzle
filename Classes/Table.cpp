@@ -153,3 +153,6 @@ void Table::onTouchEnded(Touch* touch, Event* event){
 	currentNumber = nullptr;
 	
 }
+void Table::undo(){
+	this->moveManager->undoMove();
+}

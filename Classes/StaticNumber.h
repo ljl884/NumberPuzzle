@@ -8,6 +8,7 @@ class StaticNumber :public Number{
 public:
 	StaticNumber(int value,int level);
 	void decreaseLevel();
+	void increaseLevel();
 	virtual bool coverable();
 	virtual void update();
 private:

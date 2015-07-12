@@ -2,10 +2,14 @@
 #include "Table.h"
 #include "MoveableNumber.h"
 #include "StaticNumber.h"
-#define MOVE_DURATION 0.5
+
 MoveManager::MoveManager(Table * table)
 {
 	this->table = table;
+	this->moveHistory = new std::stack<Move*>();
+}
+MoveManager::~MoveManager(){
+	delete moveHistory;
 }
 bool MoveManager::attemptMove(Direction direction, MoveableNumber* moveableNumber)
 {
@@ -38,36 +42,21 @@ bool MoveManager::attemptMove(Direction direction, MoveableNumber* moveableNumbe
 	else if (!destination->coverable())
 		return false;
 	else{
-		doMove(direction, moveableNumber, (StaticNumber*)destination);
+		
+		Move * move = new Move(moveableNumber, (StaticNumber*)destination, direction, moveableNumber->getLogicPosition());
+		moveHistory->push(move);
+		move->doMove();
 		moveableNumber->setLogicPosition(destinationPosition);
+		table->checkFinish();
 		return true;
 	}
 	
 
 }
-void MoveManager::doMove(Direction direction, MoveableNumber* moveableNumber, StaticNumber* staticNumber)
-{
-	moveableNumber->decreaseValueBy(staticNumber->getValue());
-	moveableNumber->update();
-	staticNumber->decreaseLevel();
-	staticNumber->update();
-	switch (direction)
-	{
-	case UP:
-		moveableNumber->runAction(MoveBy::create(MOVE_DURATION, ccp(0, Y_ALIGN)));
-		break;
-	case DOWN:
-		moveableNumber->runAction(MoveBy::create(MOVE_DURATION, ccp(0, 0-Y_ALIGN)));
-		break;
-	case LEFT:
-		moveableNumber->runAction(MoveBy::create(MOVE_DURATION, ccp(0-X_ALIGN, 0)));
-		break;
-	case RIGHT:
-		moveableNumber->runAction(MoveBy::create(MOVE_DURATION, ccp(X_ALIGN, 0)));
-		break;
-	default:
-		return;
-	}
-	table->checkFinish();
-
+bool MoveManager::undoMove(){
+	if (moveHistory->empty())
+		return false;
+	Move* move = moveHistory->top();
+	moveHistory->pop();
+	move->undo();
 }

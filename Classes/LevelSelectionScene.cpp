@@ -27,6 +27,7 @@ bool LevelSelectionScene::init()
 	{
 		return false;
 	}
+	LevelManager* levelManager = LevelManager::getInstance();
 	Menu* menu = Menu::create();
 	
 
@@ -37,7 +38,12 @@ bool LevelSelectionScene::init()
 	{
 		for (int j = 0; j < LEVEL_PER_ROW; j++)
 		{
-			Sprite* number = Sprite::create("level_complete_default.png");
+			
+			Sprite* number = Sprite::create();
+			if (levelManager->isLevelCompleted(j + i*LEVEL_PER_ROW))
+				number->setTexture("level_complete_default.png");
+			else
+				number->setTexture("level_incomplete_default.png");
 			Label* label = Label::create(Helper::int2str(i*LEVEL_PER_ROW + j + 1), "Marker Felt.ttf", 20);
 			number->addChild(label);
 			label->setPosition(25, 25);

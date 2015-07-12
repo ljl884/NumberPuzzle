@@ -12,19 +12,25 @@ public:
 			instance = new LevelManager();
 		return instance;
 	}
+	void undo();
 	void setParent(MainScene * parent);
 	void runLevel(int levelNumber);
+	void completeCurrentLevel();
 	void resetLevel();
 	void nextLevel();
 	void lastLevel();
+	bool isLevelCompleted(int levelNumber);
+	void resetUserData();
 private:
 	static LevelManager* instance;
 	LevelManager();
 	std::vector<std::string> levelInfo;
+	std::map<int,bool> levelCompleted;
 	MainScene* parent;
 	Table* currentTable;
 	int currentLevel;
 	void initLevels();
+	void initUserData(); //init levelCompleted vector
 	void createLevel(Table* table,std::string levelInfo);
 };
 #endif

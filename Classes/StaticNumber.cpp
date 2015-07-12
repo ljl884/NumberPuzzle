@@ -47,6 +47,10 @@ void StaticNumber::decreaseLevel()
 	else
 		level--;
 }
+void StaticNumber::increaseLevel()
+{
+	level++;
+}
 bool StaticNumber::coverable()
 {
 	if (level == 0)
@@ -61,6 +65,10 @@ void StaticNumber::update()
 	{
 		container->runAction(FadeOut::create(0.7));
 		numberLabel->runAction(FadeOut::create(0.7));
+	}
+	else{
+		container->runAction(FadeIn::create(0.7));
+		numberLabel->runAction(FadeIn::create(0.7));
 	}
 		
 }

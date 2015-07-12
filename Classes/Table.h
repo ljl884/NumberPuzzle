@@ -21,6 +21,7 @@ public:
 	void addStaticNumber(int value, int level, Point position);
 	Number* getNumberByLogicPosition(Point logicPosition);
 	bool checkFinish();
+	void undo();
 private:
 	MoveManager* moveManager;
 	MainScene* parent;
