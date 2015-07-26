@@ -1,6 +1,7 @@
 #ifndef _LEVEL_COMPLETE_LAYER_
 #define _LEVEL_COMPLETE_LAYER_
 #include "cocos2d.h"
+#include "Helper.h"
 
 USING_NS_CC;
 class MainScene;
