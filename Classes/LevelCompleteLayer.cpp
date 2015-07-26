@@ -28,6 +28,9 @@ LevelCompleteLayer::LevelCompleteLayer(MainScene* parent){
 	menu->setOpacity(0);
 	label->setOpacity(0);
 	this->parent = parent;
+
+	Helper::scaleSprite(label);
+	Helper::scaleSpriteAndChildren(menu);
 }
 
 void LevelCompleteLayer::show(){
