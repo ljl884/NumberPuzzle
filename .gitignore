@@ -1,9 +1,5 @@
 # Multi Platform Project Folder
-proj.android/
-proj.ios_mac/
-proj.win32/
 bin/
-cocosstudio/
 # Compiled Object files
 *.slo
 *.lo
