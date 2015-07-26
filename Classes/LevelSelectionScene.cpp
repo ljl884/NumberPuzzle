@@ -1,25 +1,43 @@
 #include "LevelSelectionScene.h"
 #include "LevelNumber.h"
 #include "MainScene.h"
-#define LEVEL_PER_ROW 9
-#define LEVEL_ROW_NUMBER 5
-USING_NS_CC;
+#define LEVEL_PER_ROW 5
+#define LEVEL_ROW_NUMBER 3
 
-Scene* LevelSelectionScene::createScene()
+USING_NS_CC;
+Scene* LevelSelectionScene::createScene(){
+	return createScene(0);
+}
+Scene* LevelSelectionScene::createScene(int pageNumber)
 {
 	// 'scene' is an autorelease object
 	auto scene = Scene::create();
 
 	// 'layer' is an autorelease object
-	auto layer = LevelSelectionScene::create();
-
+	auto layer = LevelSelectionScene::create(pageNumber);
+	layer->setPageNumber(pageNumber);
 	// add layer as a child to scene
 	scene->addChild(layer);
 
 	// return the scene
 	return scene;
 }
-bool LevelSelectionScene::init()
+LevelSelectionScene* LevelSelectionScene::create(int pageNumber)
+{
+	LevelSelectionScene *pRet = new(std::nothrow) LevelSelectionScene();
+	if (pRet && pRet->init(pageNumber))
+	{
+		pRet->autorelease();
+		return pRet;
+	}
+	else
+	{
+		delete pRet;
+		pRet = NULL;
+		return NULL;
+	}
+}
+bool LevelSelectionScene::init(int pageNumber)
 {
 	//////////////////////////////
 	// 1. super init first
@@ -37,27 +55,34 @@ bool LevelSelectionScene::init()
 	Sprite* bg = Sprite::create("bg.png");
 	bg->setAnchorPoint(Point::ANCHOR_BOTTOM_LEFT);
 	this->addChild(bg);
+
+	int startLevelNumber = pageNumber*(LEVEL_ROW_NUMBER*LEVEL_PER_ROW);
+
 	for (int i = 0; i < LEVEL_ROW_NUMBER; i++)
 	{
 		for (int j = 0; j < LEVEL_PER_ROW; j++)
 		{
 			
 			Sprite* number = Sprite::create();
-			if (levelManager->isLevelCompleted(j + i*LEVEL_PER_ROW))
-				number->setTexture("level_complete_default.png");
+			if (levelManager->isLevelCompleted(j + i*LEVEL_PER_ROW+startLevelNumber))
+				number->setTexture("level_complete_default@2x.png");
 			else
-				number->setTexture("level_incomplete_default.png");
-			Label* label = Label::create(Helper::int2str(i*LEVEL_PER_ROW + j + 1), "Marker Felt.ttf", 20);
+				number->setTexture("level_incomplete_default@2x.png");
+			Label* label = Label::create(Helper::int2str(i*LEVEL_PER_ROW + j + 1 + startLevelNumber), "Marker Felt.ttf", 40);
 			number->addChild(label);
-			label->setPosition(25, 25);
+			label->setPosition(50, 50);
 			//LevelNumber* number = new LevelNumber(i*LEVEL_PER_ROW + j + 1, true);
 			
-			MenuItemSprite* numberItem = MenuItemSprite::create(number, number, CC_CALLBACK_1(LevelSelectionScene::onLevelNumberCallback, this, i*LEVEL_PER_ROW + j));
-			numberItem->setPosition(180 + j * 70, 500 - i * 70);
+			MenuItemSprite* numberItem = MenuItemSprite::create(number, number, CC_CALLBACK_1(LevelSelectionScene::onLevelNumberCallback, this, i*LEVEL_PER_ROW + j + startLevelNumber));
+			numberItem->setPosition(180 + j * 140, 500 - i * 140);
 			menu->addChild(numberItem);
 			
 		}
 	}
+
+	MenuItemImage* nextPageItem = MenuItemImage::create("next.png", "next.png", CC_CALLBACK_1(LevelSelectionScene::onNextPageCallback, this));
+	menu->addChild(nextPageItem);
+	nextPageItem->setPosition(600, 50);
 	this->addChild(menu);
 	menu->setPosition(0, 0);
 	return true;
@@ -70,4 +95,15 @@ void LevelSelectionScene::onLevelNumberCallback(Ref* sender, int levelNumber){
 void LevelSelectionScene::resetProgressCallback(Ref* sender){
 	LevelManager::getInstance()->resetUserData();
 	Director::sharedDirector()->replaceScene(LevelSelectionScene::createScene());
+}
+void LevelSelectionScene::setPageNumber(int pageNumber){
+	this->pageNumber = pageNumber;
+}
+
+void LevelSelectionScene::onNextPageCallback(Ref* sender){
+	Director::sharedDirector()->replaceScene(TransitionFade::create(0.5, LevelSelectionScene::createScene(this->pageNumber + 1)));
+}
+void LevelSelectionScene::onLastPageCallback(Ref* sender){
+	if (this->pageNumber == 0)
+		return;
 }

@@ -9,14 +9,19 @@ class LevelSelectionScene : public Layer
 public:
 
 	static Scene* createScene();
+	static Scene* createScene(int pageNumber);
 
-	virtual bool init();
-	
+	virtual bool init(int pageNumber);
 
-	CREATE_FUNC(LevelSelectionScene);
-	
+	static LevelSelectionScene* create(int pageNumber);
+
+	void setPageNumber(int pageNumber);
+	void onNextPageCallback(Ref* sender);
+	void onLastPageCallback(Ref* sender);
 	void onLevelNumberCallback(Ref* sender, int levelNumber);
 	void resetProgressCallback(Ref* sender);
+private:
+	int pageNumber;
 
 };
 
