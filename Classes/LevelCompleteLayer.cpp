@@ -2,16 +2,16 @@
 #include "MainScene.h"
 LevelCompleteLayer::LevelCompleteLayer(MainScene* parent){
 	
-	background = Sprite::create("level_complete_default@3x.png");
+	background = Sprite::create("level_complete_default.png");
 	background->setScaleX(4);
 	background->setScaleY(3);
 	label = Label::create("Level Complete", "Marker Felt.ttf", 50);
 	label->setPosition(0, 100);
 	
-	MenuItemImage* levelSelection = MenuItemImage::create("select_level_default@3x.png", "select_level_selected@3x.png",
+	MenuItemImage* levelSelection = MenuItemImage::create("select_level_default.png", "select_level_selected.png",
 		CC_CALLBACK_1(MainScene::selectLevelCallback, parent));
 	levelSelection->setPosition(-90, -100);
-	MenuItemImage* resetLevel = MenuItemImage::create("reset_level_selected@3x.png", "reset_level_default@3x.png",
+	MenuItemImage* resetLevel = MenuItemImage::create("reset_level_selected.png", "reset_level_default.png",
 		CC_CALLBACK_1(MainScene::resetLevelCallback, parent));
 	resetLevel->setPosition(0, -100);
 	MenuItemImage* nextLevel = MenuItemImage::create("next3.png", "next33.png",

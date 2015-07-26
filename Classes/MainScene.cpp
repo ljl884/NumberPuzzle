@@ -42,6 +42,7 @@ bool MainScene::init()
 
 	this->levelNumberLabel = Label::create(Helper::int2str(1), "Marker Felt.ttf", 35);
 	levelNumberLabel->setPosition(480, 600);
+    Helper::scaleSprite(levelNumberLabel);
 	this->addChild(levelNumberLabel);
 
 	this->levelManager = LevelManager::getInstance();
@@ -55,14 +56,14 @@ bool MainScene::init()
 
 	Menu * menu = Menu::create();
 	MenuItemImage* restItem = MenuItemImage::create(
-		"reset_level_default@3x.png", "reset_level_selected@3x.png",
+		"reset_level_default.png", "reset_level_selected.png",
 		CC_CALLBACK_1(MainScene::resetLevelCallback,this));
 	
 	MenuItemImage* selectLevelItem = MenuItemImage::create(
-		"select_level_selected@3x.png", "select_level_default@3x.png", 
+		"select_level_selected.png", "select_level_default.png",
 		CC_CALLBACK_1(MainScene::selectLevelCallback,this));
 	MenuItemImage* undoItem = MenuItemImage::create(
-		"undo_default@3x.png", "undo_selected@3x.png",
+		"undo_default.png", "undo_selected.png",
 		CC_CALLBACK_1(MainScene::undoCallback, this));
 
 	menu->addChild(restItem);
@@ -86,7 +87,7 @@ bool MainScene::init()
 	menu->setPosition(0, 0);
 	
 	 
-
+    Helper::scaleSpriteAndChildren(menu);
     return true;
 }
 void MainScene::resetLevelCallback(Ref* sender)

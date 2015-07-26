@@ -2,6 +2,8 @@
 #define _LEVEL_SELECTION_SCENE_
 
 #include "cocos2d.h"
+#include "Helper.h"
+
 USING_NS_CC;
 
 class LevelSelectionScene : public Layer

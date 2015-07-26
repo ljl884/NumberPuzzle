@@ -1,5 +1,4 @@
 #include "LevelSelectionScene.h"
-#include "LevelNumber.h"
 #include "MainScene.h"
 #define LEVEL_PER_ROW 9
 #define LEVEL_ROW_NUMBER 5
@@ -56,6 +55,7 @@ bool LevelSelectionScene::init()
 			numberItem->setPosition(180 + j * 70, 500 - i * 70);
 			menu->addChild(numberItem);
 			
+            Helper::scaleSpriteAndChildren(number);
 		}
 	}
 	this->addChild(menu);
