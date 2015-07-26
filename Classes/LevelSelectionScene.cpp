@@ -64,9 +64,9 @@ bool LevelSelectionScene::init(int pageNumber)
 			
 			Sprite* number = Sprite::create();
 			if (levelManager->isLevelCompleted(j + i*LEVEL_PER_ROW+startLevelNumber))
-				number->setTexture("level_complete_default@2x.png");
+				number->setTexture("level_complete_default.png");
 			else
-				number->setTexture("level_incomplete_default@2x.png");
+				number->setTexture("level_incomplete_default.png");
 			Label* label = Label::create(Helper::int2str(i*LEVEL_PER_ROW + j + 1 + startLevelNumber), "Marker Felt.ttf", 40);
 			number->addChild(label);
 			label->setPosition(50, 50);
