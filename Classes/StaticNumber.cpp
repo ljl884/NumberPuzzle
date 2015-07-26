@@ -19,23 +19,23 @@ StaticNumber::StaticNumber(int value, int level)
 	numberLabel->setPosition(0, 0);
 	this->addChild(numberLabel);
 
-
+    Helper::scaleSpriteAndChildren(this);
 }
 void StaticNumber::setContainer(int level)
 {
 	switch (level)
 	{
 	case 1:
-		this->container->setTexture("frame_1@2x.png");
+		this->container->setTexture("frame_1.png");
 		break;
 	case 2:
-		this->container->setTexture("frame_2@2x.png");
+		this->container->setTexture("frame_2.png");
 		break;
 	case 3:
-		this->container->setTexture("frame_3@2x.png");
+		this->container->setTexture("frame_3.png");
 		break;
 	case 4:
-		this->container->setTexture("frame_4@2x.png");
+		this->container->setTexture("frame_4.png");
 	default:
 		break;
 	}

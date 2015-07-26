@@ -6,18 +6,17 @@ MoveableNumber::MoveableNumber(int value)
 {
 	
 	this->value = value;
-	
-
+    
 	//Init Container
 	
-	this->container = Sprite::create("level_incomplete_default@2x.png");
+	this->container = Sprite::create("level_incomplete_default.png");
 	this->addChild(container);
-	this->highlightedContainer = Sprite::create("level_complete_default@2x.png");
+	this->highlightedContainer = Sprite::create("level_complete_default.png");
 	this->addChild(highlightedContainer);
 	this->highlightedContainer->setVisible(false);
 	this->highlighted = false;
 
-	this->finishContainer = Sprite::create("frame_0_completed@2x.png");
+	this->finishContainer = Sprite::create("frame_0_completed.png");
 	this->finishContainer->setZOrder(4);
 	this->addChild(finishContainer);
 	this->finishContainer->setVisible(false);
@@ -30,8 +29,9 @@ MoveableNumber::MoveableNumber(int value)
 
 	
 	
-
+    Helper::scaleSpriteAndChildren(this);
 }
+
 void MoveableNumber::setHighlight(bool highlight){
 	this->highlightedContainer->setVisible(highlight);
 	this->highlighted = highlight;
@@ -48,13 +48,13 @@ void MoveableNumber::update()
 	{
 		finished = false;
 		finishContainer->setVisible(false);
-		container->setTexture("frame_0_wrong@2x.png");
+		container->setTexture("frame_0_wrong.png");
 	}
 	if (this->value > 0)
 	{
 		finished = false;
 		finishContainer->setVisible(false);
-		container->setTexture("level_incomplete_default@2x.png");
+		container->setTexture("level_incomplete_default.png");
 	}
 	if (this->value == 0)
 	{

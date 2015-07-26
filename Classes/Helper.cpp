@@ -2,6 +2,7 @@
 #include "Helper.h"
 
 
+
 std::string Helper::int2str(int i) {
 	std::string s;
 	std::stringstream ss(s);
@@ -33,3 +34,18 @@ void Helper::split(const std::string& src, const std::string& separator, std::ve
 	dest.push_back(substring);
 }
 
+void Helper::scaleSprite(Node *sprite) {
+    Size ratio = Constant::frameRatioSize;
+    bool xLarger = ratio.width > ratio.height;
+    if (xLarger) {
+        sprite->setScaleY(ratio.width);
+    } else {
+        sprite->setScaleX(ratio.height);
+    }
+}
+
+void Helper::scaleSpriteAndChildren(Node *sprite) {
+    for (auto childSprite : sprite->getChildren()) {
+        scaleSprite(childSprite);
+    }
+}
