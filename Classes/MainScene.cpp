@@ -38,9 +38,6 @@ bool MainScene::init()
         return false;
     }
     
-    auto rootNode = CSLoader::createNode("MainScene.csb");
-
-    addChild(rootNode);
 	this->setTouchEnabled(true);
 
 	this->levelNumberLabel = Label::create(Helper::int2str(1), "Marker Felt.ttf", 35);
