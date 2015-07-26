@@ -70,7 +70,7 @@ void Table::addMoveableNumber(int value, Point position){
 	Point p = logicPositionToRealPosition(position);
 	
 	Sprite* bg = Sprite::create("frame_0_empty.png");
-	bg->setScale(0.3);
+    Helper::scaleSprite(bg);
 	this->addChild(bg);
 	bg->setPosition(p);
 
@@ -88,7 +88,7 @@ void Table::addStaticNumber(int value, int level, Point position){
 	
 	Sprite* bg = Sprite::create("frame_1_4_empty.png");
 	this->addChild(bg);
-	bg->setScale(0.3);
+    Helper::scaleSprite(bg);
 	bg->setPosition(p);
 
 	StaticNumber* number = new StaticNumber(value, level);

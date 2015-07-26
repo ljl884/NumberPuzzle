@@ -60,7 +60,7 @@ bool MainScene::init()
 		CC_CALLBACK_1(MainScene::resetLevelCallback,this));
 	
 	MenuItemImage* selectLevelItem = MenuItemImage::create(
-		"select_level_selected.png", "select_level_default.png",
+		"select_level_default.png", "select_level_selected.png",
 		CC_CALLBACK_1(MainScene::selectLevelCallback,this));
 	MenuItemImage* undoItem = MenuItemImage::create(
 		"undo_default.png", "undo_selected.png",
@@ -74,7 +74,7 @@ bool MainScene::init()
 	selectLevelItem->setPosition(50, 600);
 	if (DEBUG){
 		MenuItemImage* nextLevelItem = MenuItemImage::create(
-			"next.png", "next1.png", CC_CALLBACK_1(MainScene::nextLevelCallback, this));
+			"last_level.png", "next_level.png", CC_CALLBACK_1(MainScene::nextLevelCallback, this));
 		MenuItemImage* backLevelItem = MenuItemImage::create(
 			"back.png", "back1.png", CC_CALLBACK_1(MainScene::backLevelCallback, this));
 		backLevelItem->setPosition(50, 600);
