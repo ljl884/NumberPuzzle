@@ -1,3 +1,4 @@
+/*Written by Wentao Li*/
 #include "LevelNumber.h"
 
 LevelNumber::LevelNumber(int value, bool completed){

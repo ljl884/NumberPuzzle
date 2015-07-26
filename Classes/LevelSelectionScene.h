@@ -16,6 +16,7 @@ public:
 	CREATE_FUNC(LevelSelectionScene);
 	
 	void onLevelNumberCallback(Ref* sender, int levelNumber);
+	void resetProgressCallback(Ref* sender);
 
 };
 

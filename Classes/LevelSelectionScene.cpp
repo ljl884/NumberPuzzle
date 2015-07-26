@@ -29,8 +29,11 @@ bool LevelSelectionScene::init()
 	}
 	LevelManager* levelManager = LevelManager::getInstance();
 	Menu* menu = Menu::create();
+	Label* resetProgressLabel = Label::create("Reset Progress", "Marker Felt.ttf", 35);
 	
-
+	MenuItemLabel* resetProgressItem = MenuItemLabel::create(resetProgressLabel, CC_CALLBACK_1(LevelSelectionScene::resetProgressCallback, this));
+	resetProgressItem->setPosition(850, 50);
+	menu->addChild(resetProgressItem);
 	Sprite* bg = Sprite::create("bg.png");
 	bg->setAnchorPoint(Point::ANCHOR_BOTTOM_LEFT);
 	this->addChild(bg);
@@ -63,4 +66,8 @@ void LevelSelectionScene::onLevelNumberCallback(Ref* sender, int levelNumber){
 	auto scene = MainScene::createScene(levelNumber);
 	Director::sharedDirector()->replaceScene(TransitionFade::create(0.5, scene));
 
+}
+void LevelSelectionScene::resetProgressCallback(Ref* sender){
+	LevelManager::getInstance()->resetUserData();
+	Director::sharedDirector()->replaceScene(LevelSelectionScene::createScene());
 }

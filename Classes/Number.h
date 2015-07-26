@@ -8,7 +8,7 @@
 #define SCALE 1
 
 USING_NS_CC;
-
+//
 class Number : public Node{
 public:
 	Number();

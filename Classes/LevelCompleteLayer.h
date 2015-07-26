@@ -14,6 +14,7 @@ private:
 	Label* label;
 	Sprite* background;
 	Menu* menu;
+	
 };
 
 #endif

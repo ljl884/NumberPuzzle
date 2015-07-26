@@ -13,8 +13,8 @@ public:
 	inline bool isFinished(){ return this->finished; }
 
 private:
-	bool finished;
-	bool highlighted;
+	bool finished;//This flag will be set to true only when the value is 0
+	bool highlighted;//This flag will be set to true when the number is highlighted
 	Sprite* highlightedContainer;
 	Sprite* finishContainer;
 };
