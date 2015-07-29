@@ -58,7 +58,8 @@ bool LevelSelectionScene::init(int pageNumber)
 	{
 		for (int j = 0; j < LEVEL_PER_ROW; j++)
 		{
-			
+			if (j + i*LEVEL_PER_ROW + startLevelNumber >= levelManager->levelCount())
+				break;
 			Sprite* number = Sprite::create();
             Sprite* numberSelected = Sprite::create();
             if (levelManager->isLevelCompleted(j + i*LEVEL_PER_ROW+startLevelNumber)) {
@@ -83,14 +84,19 @@ bool LevelSelectionScene::init(int pageNumber)
             Helper::scaleSpriteAndChildren(number);
 		}
 	}
-
-	MenuItemImage* nextPageItem = MenuItemImage::create("next_page_default.png", "next_page_selected.png", CC_CALLBACK_1(LevelSelectionScene::onNextPageCallback, this));
-	menu->addChild(nextPageItem);
-    nextPageItem->setPosition(600, 50);
+	if ((pageNumber+1)*(LEVEL_ROW_NUMBER*LEVEL_PER_ROW)<levelManager->levelCount()){
+		MenuItemImage* nextPageItem = MenuItemImage::create("next_page_default.png", "next_page_selected.png", CC_CALLBACK_1(LevelSelectionScene::onNextPageCallback, this));
+		menu->addChild(nextPageItem);
+		nextPageItem->setPosition(600, 50);
+	}
+	
     
-    MenuItemImage* lastPageItem = MenuItemImage::create("last_page_default.png", "last_page_selected.png", CC_CALLBACK_1(LevelSelectionScene::onLastPageCallback, this));
-    menu->addChild(lastPageItem);
-    lastPageItem->setPosition(400, 50);
+	if (pageNumber != 0){
+		MenuItemImage* lastPageItem = MenuItemImage::create("last_page_default.png", "last_page_selected.png", CC_CALLBACK_1(LevelSelectionScene::onLastPageCallback, this));
+		menu->addChild(lastPageItem);
+		lastPageItem->setPosition(400, 50);
+	}
+    
     
     this->addChild(menu);
 	menu->setPosition(0, 0);

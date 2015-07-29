@@ -12,6 +12,7 @@ public:
 			instance = new LevelManager();
 		return instance;
 	}
+	inline int levelCount(){ return levelInfo.size(); }
 	void undo();
 	void setParent(MainScene * parent);
 	void runLevel(int levelNumber);
