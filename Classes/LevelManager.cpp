@@ -1,6 +1,9 @@
 #include "LevelManager.h"
 #include "Helper.h"
 #include "MainScene.h"
+#include "Tutorial.h"
+#include <iterator>
+
 LevelManager* LevelManager::instance = nullptr;
 LevelManager::LevelManager()
 {
@@ -117,6 +120,20 @@ void LevelManager::runLevel(int levelNumber)
 		currentLevel = levelNumber;
 		currentTable = table;
 		parent->setLevelNumber(currentLevel + 1);
+		if (levelNumber == 0)
+		{
+			Tutorial* tutorial = Tutorial::create();
+			table->addChild(tutorial);
+			tutorial->setZOrder(5);
+			tutorial->TutorialOne();
+		}
+		else if (levelNumber == 1)
+		{
+			Tutorial* tutorial = Tutorial::create();
+			table->addChild(tutorial);
+			tutorial->setZOrder(5);
+			tutorial->TutorialTwo();
+		}
 	}
 	
 }
