@@ -9,6 +9,7 @@ proj.win32/
 *.lo
 *.o
 *.obj
+*.java
 
 # Precompiled Headers
 *.gch
