@@ -33,3 +33,5 @@ proj.win32/
 *.exe
 *.out
 *.app
+NumberPuzzle.ccs
+NumberPuzzle.cfg

@@ -12,7 +12,10 @@ public:
 			instance = new LevelManager();
 		return instance;
 	}
-	inline int levelCount(){ return levelInfo.size(); }
+    
+    // The inline method provides a level count information.
+	inline int levelCount() { return int(levelInfo.size()); }
+    
 	void undo();
 	void setParent(MainScene * parent);
 	void runLevel(int levelNumber);

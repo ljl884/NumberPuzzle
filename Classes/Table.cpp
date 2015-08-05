@@ -57,11 +57,11 @@ Point Table::logicPositionToRealPosition(Point logicPosition)
 	if (abs(lx) > ((TABLE_WIDTH - 1) / 2) ||
 		abs(ly) > ((TABLE_HIGHT - 1) / 2))
 	{
-		return ccp(0,0);
+		return Point(0,0);
 	}
 	int rx = X_ALIGN*lx;
 	int ry = Y_ALIGN*ly;
-	return ccp(rx, ry);
+	return Point(rx, ry);
 
 }
 

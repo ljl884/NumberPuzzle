@@ -103,7 +103,7 @@ void MainScene::backLevelCallback(Ref* sender){
 	this->levelManager->lastLevel();
 }
 void MainScene::selectLevelCallback(Ref* sender){
-	Director::sharedDirector()->replaceScene(TransitionFade::create(0.5,LevelSelectionScene::createScene()));
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5,LevelSelectionScene::createScene()));
 }
 void MainScene::undoCallback(Ref* sender){
 	this->levelManager->undo();
