@@ -48,7 +48,10 @@ bool LevelSelectionScene::init(int pageNumber)
         return false;
     }
     LevelManager* levelManager = LevelManager::getInstance();
-    this->maximumPageNumber = ceil(levelManager->levelCount() / (LEVEL_PER_ROW * LEVEL_ROW_NUMBER));
+    
+    // Remember to convert the integer to double first, otherwise the division will be automatically converted to
+    // integer.
+    this->maximumPageNumber = ceil(double(levelManager->levelCount()) / double(LEVEL_PER_ROW * LEVEL_ROW_NUMBER));
     
     Menu* menu = Menu::create();
     Label* resetProgressLabel = Label::create("Reset Progress", "Marker Felt.ttf", 35);
@@ -57,7 +60,7 @@ bool LevelSelectionScene::init(int pageNumber)
     resetProgressItem->setPosition(850, 50);
     menu->addChild(resetProgressItem);
     
-    int startLevelNumber = pageNumber*(LEVEL_ROW_NUMBER*LEVEL_PER_ROW);
+    int startLevelNumber = pageNumber * (LEVEL_ROW_NUMBER * LEVEL_PER_ROW);
     
     for (int i = 0; i < LEVEL_ROW_NUMBER; i++)
     {
@@ -115,6 +118,9 @@ bool LevelSelectionScene::init(int pageNumber)
     
     this->addChild(menu);
     menu->setPosition(0, 0);
+    
+    // CCLOG("Current page number: %d : %d", pageNumber, maximumPageNumber);
+    
     return true;
 }
 void LevelSelectionScene::onLevelNumberCallback(Ref* sender, int levelNumber){
