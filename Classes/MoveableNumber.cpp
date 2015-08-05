@@ -1,6 +1,6 @@
 /*Written by Wentao Li*/
 #include "MoveableNumber.h"
-#include "Helper.h"
+#include "Common.h"
 
 MoveableNumber::MoveableNumber(int value)
 {
@@ -23,7 +23,7 @@ MoveableNumber::MoveableNumber(int value)
 	this->finished = false;
 
 	//Init number label
-	this->numberLabel = Label::create(Helper::int2str(value), "Marker Felt.ttf", 35);
+	this->numberLabel = Label::createWithTTF(FontManager::getInstance().levelNumberLabelFontConfig(), Helper::int2str(value));
 	numberLabel->setPosition(0,0);
 	this->addChild(numberLabel);
 

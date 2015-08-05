@@ -3,17 +3,15 @@
 #define _HELPER_
 
 #include "cocos2d.h"
-#include "Constant.h"
-
-USING_NS_CC;
+#include "Common.h"
 
 class Helper{
 private:
 public:
 	static std::string int2str(int i);
 	static void split(const std::string& src, const std::string& separator, std::vector<std::string>& dest);
-    static void scaleSprite(Node *sprite);
-    static void scaleSpriteAndChildren(Node *sprite);
+    static void scaleSprite(cocos2d::Node *sprite);
+    static void scaleSpriteAndChildren(cocos2d::Node *sprite);
 };
 
 #endif

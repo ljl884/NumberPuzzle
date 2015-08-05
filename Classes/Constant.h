@@ -11,8 +11,6 @@
 
 #include "cocos2d.h"
 
-USING_NS_CC;
-
 class Constant {
 public:
     // Declare the resolution we designed the game at

@@ -1,6 +1,7 @@
 /*Written by Wentao Li*/
 #include "StaticNumber.h"
 
+USING_NS_CC;
 
 StaticNumber::StaticNumber(int value, int level)
 {
@@ -15,7 +16,7 @@ StaticNumber::StaticNumber(int value, int level)
 	this->addChild(container);
 
 	//Init number label
-	this->numberLabel = Label::create(Helper::int2str(value), "Marker Felt.ttf", 35);
+	this->numberLabel = Label::createWithTTF(FontManager::getInstance().levelNumberLabelFontConfig(), Helper::int2str(value));
 	numberLabel->setPosition(0, 0);
 	this->addChild(numberLabel);
 

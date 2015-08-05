@@ -2,8 +2,9 @@
 #define _LEVEL_MANAGER_
 #include "cocos2d.h"
 #include "Table.h"
-USING_NS_CC;
+
 class MainScene;
+
 class LevelManager{
 public:
 	
@@ -12,7 +13,10 @@ public:
 			instance = new LevelManager();
 		return instance;
 	}
-	inline int levelCount(){ return levelInfo.size(); }
+    
+    // The inline method provides a level count information.
+	inline int levelCount() { return int(levelInfo.size()); }
+    
 	void undo();
 	void setParent(MainScene * parent);
 	void runLevel(int levelNumber);

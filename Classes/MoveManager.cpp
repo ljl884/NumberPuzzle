@@ -3,6 +3,8 @@
 #include "MoveableNumber.h"
 #include "StaticNumber.h"
 
+USING_NS_CC;
+
 MoveManager::MoveManager(Table * table)
 {
 	this->table = table;
@@ -22,16 +24,16 @@ bool MoveManager::attemptMove(Direction direction, MoveableNumber* moveableNumbe
 	switch (direction)
 	{
 	case UP:
-		destinationPosition = ccp(logicPosition.x, logicPosition.y + 1);
+		destinationPosition = Point(logicPosition.x, logicPosition.y + 1);
 		break;
 	case DOWN:
-		destinationPosition = ccp(logicPosition.x, logicPosition.y - 1);
+		destinationPosition = Point(logicPosition.x, logicPosition.y - 1);
 		break;
 	case LEFT:
-		destinationPosition = ccp(logicPosition.x-1, logicPosition.y);
+		destinationPosition = Point(logicPosition.x-1, logicPosition.y);
 		break;
 	case RIGHT:
-		destinationPosition = ccp(logicPosition.x+1, logicPosition.y);
+		destinationPosition = Point(logicPosition.x+1, logicPosition.y);
 		break;
 	default:
 		return false;
@@ -53,10 +55,12 @@ bool MoveManager::attemptMove(Direction direction, MoveableNumber* moveableNumbe
 	
 
 }
-bool MoveManager::undoMove(){
+bool MoveManager::undoMove() {
 	if (moveHistory->empty())
 		return false;
 	Move* move = moveHistory->top();
 	moveHistory->pop();
 	move->undo();
+    
+    return true;
 }

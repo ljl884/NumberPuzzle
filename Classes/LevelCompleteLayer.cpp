@@ -1,10 +1,11 @@
 #include "LevelCompleteLayer.h"
-#include "MainScene.h"
+#include "Common.h"
+
 LevelCompleteLayer::LevelCompleteLayer(MainScene* parent){
 	
 	background = Sprite::create("popup_bg.png");
-	label = Label::create("Level Complete", "Marker Felt.ttf", 50);
-	label->setPosition(0, 100);
+    label = Label::createWithTTF(FontManager::getInstance().levelCompletionTextLabelFontConfig(), "Level Complete");
+    label->setPosition(0, 100);
 	
 	MenuItemImage* levelSelection = MenuItemImage::create("select_level_default.png", "select_level_selected.png",
 		CC_CALLBACK_1(MainScene::selectLevelCallback, parent));
@@ -14,12 +15,14 @@ LevelCompleteLayer::LevelCompleteLayer(MainScene* parent){
 	resetLevel->setPosition(0, -100);
 	MenuItemImage* nextLevel = MenuItemImage::create("next_level_default.png", "next_level_selected.png",
 		CC_CALLBACK_1(MainScene::nextLevelCallback, parent));
+    
 	nextLevel->setPosition(90, -100);
 	menu = Menu::create(levelSelection, resetLevel, nextLevel,NULL);
 	menu->setPosition(0, 0);
 	menu->setEnabled(false);
 	this->setZOrder(5);
 	this->addChild(background);
+    
 	this->addChild(label);
 	this->addChild(menu);
 	background->setOpacity(0);
