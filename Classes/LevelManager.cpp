@@ -1,6 +1,9 @@
 #include "LevelManager.h"
-#include "Helper.h"
+#include "Common.h"
 #include "MainScene.h"
+
+using namespace std;
+
 LevelManager* LevelManager::instance = nullptr;
 LevelManager::LevelManager()
 {
@@ -118,12 +121,12 @@ void LevelManager::undo(){
 }
 void LevelManager::createLevel(Table* table,std::string levelInfo)
 {
-    std::vector<std::string> strings;
-    std::list<std::string> splitedWords;
+    vector<string> strings;
+    list<string> splitedWords;
     Helper::split(levelInfo, "#", strings); //split text in script by "#"
-    std::copy(strings.begin(), strings.end(), std::back_inserter(splitedWords)); //copy the vector to the list container
-    for (std::string numberString : strings){
-        std::vector<std::string> numbers;
+    copy(strings.begin(), strings.end(), back_inserter(splitedWords)); //copy the vector to the list container
+    for (string numberString : strings){
+        vector<string> numbers;
         Helper::split(numberString, ",", numbers);
         if (numbers.size() == 3){
             table->addMoveableNumber(atoi(numbers.at(0).c_str()),

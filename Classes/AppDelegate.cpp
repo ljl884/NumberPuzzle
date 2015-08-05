@@ -1,7 +1,6 @@
 #include "AppDelegate.h"
+#include "Common.h"
 #include "MainScene.h"
-#include "Helper.h"
-
 #include <vector>
 #include <array>
 

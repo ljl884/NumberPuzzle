@@ -2,8 +2,9 @@
 #define _LEVEL_MANAGER_
 #include "cocos2d.h"
 #include "Table.h"
-USING_NS_CC;
+
 class MainScene;
+
 class LevelManager{
 public:
 	

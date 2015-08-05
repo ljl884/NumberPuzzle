@@ -2,7 +2,7 @@
 #define _MOVE_MANAGER_
 #include "cocos2d.h"
 #include "Move.h"
-USING_NS_CC;
+
 class Table;
 class MoveableNumber;
 class StaticNumber;
@@ -14,7 +14,7 @@ public:
 	~MoveManager();
 	bool attemptMove(Direction direction, MoveableNumber* moveableNumber);
 	bool undoMove();
-private:	
+private:
 	Table* table;
 	std::stack<Move*> *moveHistory;
 };

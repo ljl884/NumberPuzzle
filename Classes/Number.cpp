@@ -1,8 +1,9 @@
 /*Written by Wentao Li*/
 #include "Number.h"
-#include "Helper.h"
+
 #define APPEAR_ANIMATION_TIME 0.3
 
+USING_NS_CC;
 
 Number::Number()
 {

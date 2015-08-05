@@ -1,10 +1,10 @@
 /*Written by Wentao Li*/
 #include "Table.h"
+#include "StaticNumber.h"
+#include "MainScene.h"
 #include "MoveManager.h"
 #include "Number.h"
 #include "MoveableNumber.h"
-#include "StaticNumber.h"
-#include "MainScene.h"
 
 Table::Table(MainScene* parent)
 {

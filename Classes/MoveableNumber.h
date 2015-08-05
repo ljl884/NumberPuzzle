@@ -3,6 +3,7 @@
 #define _MOVEABLE_NUMBER_
 #include "cocos2d.h"
 #include "Number.h"
+
 USING_NS_CC;
 class MoveableNumber :public Number{
 public:

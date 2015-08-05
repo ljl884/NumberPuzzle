@@ -1,6 +1,13 @@
 #include "Move.h"
+#include "Common.h"
+#include "MoveableNumber.h"
+#include "StaticNumber.h"
 #include "Table.h"
+
+USING_NS_CC;
+
 #define MOVE_DURATION 0.3
+
 Move::Move(MoveableNumber* moveableNumber, StaticNumber* staticNumber, Direction direction, Point fromLogicPosition)
 {
 	this->moveableNumber = moveableNumber;

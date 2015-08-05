@@ -1,9 +1,10 @@
 #include "LevelSelectionScene.h"
 #include "MainScene.h"
+#include "LevelManager.h"
+#include "Common.h"
+
 #define LEVEL_PER_ROW 5
 #define LEVEL_ROW_NUMBER 3
-
-USING_NS_CC;
 
 int LevelSelectionScene::currentPageNumber = 0;
 
@@ -54,10 +55,10 @@ bool LevelSelectionScene::init(int pageNumber)
     this->maximumPageNumber = ceil(double(levelManager->levelCount()) / double(LEVEL_PER_ROW * LEVEL_ROW_NUMBER));
     
     Menu* menu = Menu::create();
-    Label* resetProgressLabel = Label::create("Reset Progress", "Marker Felt.ttf", 35);
+    Label* resetProgressLabel = Label::createWithTTF(FontManager::getInstance().levelSelectionTextLabelFontConfig(), "Reset Progress");
     
     MenuItemLabel* resetProgressItem = MenuItemLabel::create(resetProgressLabel, CC_CALLBACK_1(LevelSelectionScene::resetProgressCallback, this));
-    resetProgressItem->setPosition(850, 50);
+    resetProgressItem->setPosition(800, 50);
     menu->addChild(resetProgressItem);
     
     int startLevelNumber = pageNumber * (LEVEL_ROW_NUMBER * LEVEL_PER_ROW);
@@ -84,13 +85,16 @@ bool LevelSelectionScene::init(int pageNumber)
                 numberSelected->setTexture("level_incomplete_selected.png");
             }
             
-            Label* label = Label::create(Helper::int2str(currentLevelNumber + 1), "Marker Felt.ttf", 40);
+            Label* label = Label::createWithTTF(FontManager::getInstance().levelSelectionNumberLabelFontConfig(), Helper::int2str(currentLevelNumber + 1));
+            
             number->addChild(label);
             numberSelected->addChild(label);
+            
             label->setPosition(number->getContentSize().width / 2, number->getContentSize().height / 2);
             //LevelNumber* number = new LevelNumber(i*LEVEL_PER_ROW + j + 1, true);
             
             MenuItemSprite* numberItem = MenuItemSprite::create(number, numberSelected, CC_CALLBACK_1(LevelSelectionScene::onLevelNumberCallback, this, currentLevelNumber));
+            
             numberItem->setPosition(180 + j * 140, 500 - i * 140);
             menu->addChild(numberItem);
             

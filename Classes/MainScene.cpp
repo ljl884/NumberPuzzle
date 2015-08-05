@@ -1,12 +1,14 @@
 #include "MainScene.h"
+#include "LevelSelectionScene.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "StaticNumber.h"
 #include "MoveableNumber.h"
 #include "Table.h"
-#include "Helper.h"
-#include "LevelSelectionScene.h"
-
+#include "Common.h"
+#include "LevelManager.h"
+#include "LevelCompleteLayer.h"
+#include "CoverLayer.h"
 
 USING_NS_CC;
 
@@ -40,7 +42,7 @@ bool MainScene::init()
     
 	this->setTouchEnabled(true);
 
-	this->levelNumberLabel = Label::create(Helper::int2str(1), "Marker Felt.ttf", 35);
+    this->levelNumberLabel = Label::createWithTTF(FontManager::getInstance().levelTextLabelFontConfig(), Helper::int2str(1));
 	levelNumberLabel->setPosition(480, 600);
     Helper::scaleSprite(levelNumberLabel);
 	this->addChild(levelNumberLabel);
@@ -49,10 +51,14 @@ bool MainScene::init()
 	levelManager->setParent(this);
 	levelManager->runLevel(0);
 
+    // The mask should behind the complete layer.
+    levelCompleteMask = CoverLayer::create();
+    this->addChild(levelCompleteMask, 4);
+    
 	levelCompleteLayer = new LevelCompleteLayer(this);
 	levelCompleteLayer->setPosition(480, 320);
-	this->addChild(levelCompleteLayer);
-	
+	this->addChild(levelCompleteLayer, 5);
+    
 
 	Menu * menu = Menu::create();
 	MenuItemImage* restItem = MenuItemImage::create(
@@ -93,10 +99,12 @@ bool MainScene::init()
 void MainScene::resetLevelCallback(Ref* sender)
 {
 	this->levelCompleteLayer->hide();
+    this->levelCompleteMask->hide();
 	this->levelManager->resetLevel();
 }
 void MainScene::nextLevelCallback(Ref* sender){
 	this->levelCompleteLayer->hide();
+    this->levelCompleteMask->hide();
 	this->levelManager->nextLevel();
 }
 void MainScene::backLevelCallback(Ref* sender){
@@ -111,6 +119,7 @@ void MainScene::undoCallback(Ref* sender){
 void MainScene::onLevelComplete()
 {
 	levelManager->completeCurrentLevel();
+    levelCompleteMask->show();
 	levelCompleteLayer->show();
 }
 void MainScene::setLevelNumber(int levelNumber){

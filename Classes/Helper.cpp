@@ -1,33 +1,33 @@
 /*Written by Wentao Li*/
 #include "Helper.h"
 
+using namespace std;
 
-
-std::string Helper::int2str(int i) {
-	std::string s;
-	std::stringstream ss(s);
+string Helper::int2str(int i) {
+	string s;
+	stringstream ss(s);
 	ss << i;
 
 	return ss.str();
 }
 
-void Helper::split(const std::string& src, const std::string& separator, std::vector<std::string>& dest)
+void Helper::split(const string& src, const string& separator, vector<string>& dest)
 {
-	std::string str = src;
-	std::string substring;
-	std::string::size_type start = 0, index;
+	string str = src;
+	string substring;
+	string::size_type start = 0, index;
 
 	do
 	{
 		index = str.find_first_of(separator, start);
-		if (index != std::string::npos)
+		if (index != string::npos)
 		{
 			substring = str.substr(start, index - start);
 			dest.push_back(substring);
 			start = str.find_first_not_of(separator, index);
-			if (start == std::string::npos) return;
+			if (start == string::npos) return;
 		}
-	} while (index != std::string::npos);
+	} while (index != string::npos);
 
 	//the last token
 	substring = str.substr(start);

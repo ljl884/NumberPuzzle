@@ -1,5 +1,7 @@
 #include "Tutorial.h"
 #include "Table.h"
+USING_NS_CC;
+
 void Tutorial::TutorialOne(){
 	Sprite* pointer = Sprite::create("pointer.png");
 	pointer->setRotation(45);

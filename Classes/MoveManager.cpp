@@ -3,6 +3,8 @@
 #include "MoveableNumber.h"
 #include "StaticNumber.h"
 
+USING_NS_CC;
+
 MoveManager::MoveManager(Table * table)
 {
 	this->table = table;

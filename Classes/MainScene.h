@@ -2,8 +2,11 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
-#include "LevelManager.h"
-#include "LevelCompleteLayer.h"
+
+class LevelManager;
+class LevelCompleteLayer;
+class CoverLayer;
+
 #define DEBUG false
 
 class MainScene : public cocos2d::Layer
@@ -28,7 +31,8 @@ public:
 private:
 	LevelManager* levelManager;
 	LevelCompleteLayer* levelCompleteLayer;
-	Label* levelNumberLabel;
+    CoverLayer* levelCompleteMask;
+	cocos2d::Label* levelNumberLabel;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
