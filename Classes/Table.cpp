@@ -59,8 +59,12 @@ Point Table::logicPositionToRealPosition(Point logicPosition)
 	{
 		return ccp(0,0);
 	}
-	int rx = X_ALIGN*lx;
-	int ry = Y_ALIGN*ly;
+
+
+	int rx = Constant::X_ALIGN*lx;
+	int ry = Constant::Y_ALIGN*ly;
+
+	
 	return ccp(rx, ry);
 
 }
@@ -82,6 +86,7 @@ void Table::addMoveableNumber(int value, Point position){
 	number->setLogicPosition(position);
 	number->playAppearAnimation(0.5 + 0.05*MoveableNumberCount);
 	this->moveableNumbers.push_back(number);
+	
 }
 void Table::addStaticNumber(int value, int level, Point position){
 	Point p = logicPositionToRealPosition(position);
@@ -124,22 +129,22 @@ void Table::onTouchMoved(Touch* touch, Event* event){
 		return;
 	Point position = this->convertToNodeSpace(touch->getLocation());
 	Point currentNumberPosition = logicPositionToRealPosition(currentNumber->getLogicPosition());
-	if ((position.x - currentNumberPosition.x) > X_ALIGN / 2)
+	if ((position.x - currentNumberPosition.x) >  Constant::X_ALIGN / 2)
 	{
 		moveManager->attemptMove(RIGHT, currentNumber);
 		return;
 	}
-	if ((position.x - currentNumberPosition.x) < ((0 - X_ALIGN) / 2))
+	if ((position.x - currentNumberPosition.x) < ((0 - Constant::X_ALIGN) / 2))
 	{
 		moveManager->attemptMove(LEFT, currentNumber);
 		return;
 	}
-	if ((position.y - currentNumberPosition.y) > ( Y_ALIGN / 2))
+	if ((position.y - currentNumberPosition.y) > (Constant::Y_ALIGN / 2))
 	{
 		moveManager->attemptMove(UP, currentNumber);
 		return;
 	}
-	if ((position.y - currentNumberPosition.y) < ((0 - Y_ALIGN) / 2))
+	if ((position.y - currentNumberPosition.y) < ((0 - Constant::Y_ALIGN) / 2))
 	{
 		moveManager->attemptMove(DOWN, currentNumber);
 		return;

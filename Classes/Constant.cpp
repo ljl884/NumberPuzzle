@@ -10,3 +10,5 @@
 
 Size Constant::designResolutionSize = Size(960, 640);
 Size Constant::frameRatioSize = Size::ZERO;
+int Constant::X_ALIGN = 100;
+int Constant::Y_ALIGN = 100;

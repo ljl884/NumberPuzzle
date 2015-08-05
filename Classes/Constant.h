@@ -18,6 +18,8 @@ public:
     // Declare the resolution we designed the game at
     static cocos2d::Size designResolutionSize;
     static cocos2d::Size frameRatioSize;
+	static int X_ALIGN;
+	static int Y_ALIGN;
 };
 
 #endif

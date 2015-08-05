@@ -4,8 +4,8 @@
 #include "cocos2d.h"
 #define TABLE_WIDTH 13
 #define TABLE_HIGHT 9
-#define X_ALIGN 100
-#define Y_ALIGN 100
+//#define X_ALIGN 100
+//#define Y_ALIGN 100
 using namespace cocos2d;
 
 class StaticNumber;

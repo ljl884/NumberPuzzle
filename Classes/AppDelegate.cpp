@@ -47,7 +47,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::createWithRect("NumberPuzzle", Rect(0, 0, 960, 640));
+        glview = GLViewImpl::createWithRect("NumberPuzzle", Rect(0, 0, 1920, 1080));
         director->setOpenGLView(glview);
     }
     
@@ -80,6 +80,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
             float heightScale = frameSize.height / Constant::designResolutionSize.height / scaleFactor;
             float widthScale = frameSize.width / Constant::designResolutionSize.width / scaleFactor;
             Constant::frameRatioSize = Size(widthScale, heightScale);
+			Constant::X_ALIGN *= 1 / Constant::frameRatioSize.width;
+			Constant::Y_ALIGN *= 1 / Constant::frameRatioSize.height;
             
             break;
         }

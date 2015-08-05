@@ -37,8 +37,8 @@ void Helper::split(const std::string& src, const std::string& separator, std::ve
 void Helper::scaleSprite(Node *sprite) {
     Size ratio = Constant::frameRatioSize;
     bool xLarger = ratio.width > ratio.height;
-	sprite->setScaleY(ratio.width);
-	sprite->setScaleX(ratio.height);
+	sprite->setScaleY(1 / ratio.height * ratio.width / ratio.height);
+	sprite->setScaleX(1 / ratio.width * ratio.width / ratio.height);
 }
 
 void Helper::scaleSpriteAndChildren(Node *sprite) {
