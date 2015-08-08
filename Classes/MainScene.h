@@ -26,6 +26,7 @@ public:
 	void backLevelCallback(Ref* sender);
 	void selectLevelCallback(Ref* sender);
 	void undoCallback(Ref* sender);
+    void musicCallback(Ref* sender);
 	void onLevelComplete();
 	void setLevelNumber(int levelNumber);
 private:
@@ -33,6 +34,7 @@ private:
 	LevelCompleteLayer* levelCompleteLayer;
     CoverLayer* levelCompleteMask;
 	cocos2d::Label* levelNumberLabel;
+    cocos2d::MenuItemToggle *musicItem;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

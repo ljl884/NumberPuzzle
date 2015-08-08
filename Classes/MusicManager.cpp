@@ -9,6 +9,9 @@
 #include "MusicManager.h"
 
 using namespace CocosDenshion;
+USING_NS_CC;
+
+#define SOUND_ENABLE_KEY "sound_enable"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_BLACKBERRY || CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
     #define NUMBER_MOVE_INCOMPLETE_EFFECT "number_move_incomplete.ogg"
@@ -35,12 +38,15 @@ void MusicManager::preload() {
     audioEngine->preloadEffect(NUMBER_FADE_IN_EFFECT);
     audioEngine->preloadEffect(LEVEL_COMPLETE_EFFECT);
     audioEngine->preloadEffect(BUTTON_SELECTION_EFFECT);
-    audioEngine->setBackgroundMusicVolume(0.5f);
-    audioEngine->setEffectsVolume(0.5F);
+    audioEngine->setBackgroundMusicVolume(1.0f);
+    audioEngine->setEffectsVolume(1.0F);
 }
 
 void MusicManager::playBackgroundMusic() {
-    audioEngine->playBackgroundMusic(BACKGROUND_MUSIC, true);
+    if (UserDefault::getInstance()->getBoolForKey(SOUND_ENABLE_KEY, true)) {
+        audioEngine->playBackgroundMusic(BACKGROUND_MUSIC, true);
+        isStarted = true;
+    }
 }
 
 void MusicManager::pauseBackgroundMusic() {
@@ -48,7 +54,9 @@ void MusicManager::pauseBackgroundMusic() {
 }
 
 void MusicManager::stopBackgroundMusic() {
-    audioEngine->stopBackgroundMusic();
+    if (UserDefault::getInstance()->getBoolForKey(SOUND_ENABLE_KEY, true)) {
+        audioEngine->stopBackgroundMusic();
+    }
 }
 
 void MusicManager::resumeBackgroundMusic() {
@@ -56,21 +64,50 @@ void MusicManager::resumeBackgroundMusic() {
 }
 
 void MusicManager::playNumberMoveCompleteEffect() {
-    audioEngine->playEffect(NUMBER_MOVE_COMPLETE_EFFECT);
+    playEffectIfNotMute(NUMBER_MOVE_COMPLETE_EFFECT);
 }
 
 void MusicManager::playNumberMoveInCompleteEffect() {
-    audioEngine->playEffect(NUMBER_MOVE_INCOMPLETE_EFFECT);
+    playEffectIfNotMute(NUMBER_MOVE_INCOMPLETE_EFFECT);
 }
 
 void MusicManager::playLevelCompleteEffect() {
-    audioEngine->playEffect(LEVEL_COMPLETE_EFFECT);
+    playEffectIfNotMute(LEVEL_COMPLETE_EFFECT);
 }
 
 void MusicManager::playNumberFadeInEffect() {
-    audioEngine->playEffect(NUMBER_FADE_IN_EFFECT);
+    playEffectIfNotMute(NUMBER_FADE_IN_EFFECT, 1.0f);
 }
 
 void MusicManager::playButtonSelectionEffect() {
-    audioEngine->playEffect(BUTTON_SELECTION_EFFECT);
+    playEffectIfNotMute(BUTTON_SELECTION_EFFECT);
+}
+
+void MusicManager::playEffectIfNotMute(const char *effectName, float gain) {
+    if (audioEngine->isBackgroundMusicPlaying()) {
+        audioEngine->playEffect(effectName, false, 1.0f, 0.0f, gain);
+    }
+}
+
+void MusicManager::setMute(bool value) {
+    // Note, we need to store the sound preference inside user defaults.
+    UserDefault::getInstance()->setBoolForKey(SOUND_ENABLE_KEY, !value);
+    
+    if (value && isStarted) {
+        pauseBackgroundMusic();
+    } else {
+        if (isStarted) {
+            resumeBackgroundMusic();
+        } else {
+            playBackgroundMusic();
+        }
+    }
+}
+
+bool MusicManager::isMute() {
+    return !UserDefault::getInstance()->getBoolForKey(SOUND_ENABLE_KEY, true);
+}
+
+void MusicManager::toggleMute() {
+    setMute(audioEngine->isBackgroundMusicPlaying());
 }

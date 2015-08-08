@@ -32,6 +32,9 @@ public:
     void playLevelCompleteEffect();
     void playNumberFadeInEffect();
     void playButtonSelectionEffect();
+    void setMute(bool value);
+    void toggleMute();
+    bool isMute();
     
 private:
     MusicManager() {};
@@ -44,6 +47,10 @@ private:
     void operator=(MusicManager const&)    = delete;
     
     static CocosDenshion::SimpleAudioEngine *audioEngine;
+    
+    void playEffectIfNotMute(const char *effectName, float gain = 0.5f);
+    
+    bool isStarted = false;
 };
 
 #endif /* MusicManager_hpp */

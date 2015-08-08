@@ -68,16 +68,35 @@ bool MainScene::init()
 	MenuItemImage* selectLevelItem = MenuItemImage::create(
 		"select_level_default.png", "select_level_selected.png",
 		CC_CALLBACK_1(MainScene::selectLevelCallback,this));
-	MenuItemImage* undoItem = MenuItemImage::create(
-		"undo_default.png", "undo_selected.png",
-		CC_CALLBACK_1(MainScene::undoCallback, this));
+	MenuItemImage* undoItem = MenuItemImage::create("undo_default.png",
+                                                    "undo_selected.png",
+                                                    CC_CALLBACK_1(MainScene::undoCallback, this));
+    MenuItemImage *musicEnabledItem = MenuItemImage::create("sound_default.png",
+                                                            "sound_selected.png");
+    
+    MenuItemImage *musicDisabledItem = MenuItemImage::create("sound_disabled.png", "sound_selected.png");
+    
+    
+    musicItem = MenuItemToggle::createWithCallback(CC_CALLBACK_1(MainScene::musicCallback, this),
+                                                   musicEnabledItem,
+                                                   musicDisabledItem,
+                                                   NULL);
+    
 
+    int defaultIndex = MusicManager::getInstance().isMute() ? 1 : 0;
+    
+    musicItem->setSelectedIndex(defaultIndex);
+    
 	menu->addChild(restItem);
 	menu->addChild(selectLevelItem);
 	menu->addChild(undoItem);
+    menu->addChild(musicItem);
+    
 	undoItem->setPosition(50, 50);
 	restItem->setPosition(900, 50);	
 	selectLevelItem->setPosition(50, 600);
+    musicItem->setPosition(900, 600);
+    
 	if (DEBUG){
 		MenuItemImage* nextLevelItem = MenuItemImage::create(
 			"last_level.png", "next_level.png", CC_CALLBACK_1(MainScene::nextLevelCallback, this));
@@ -116,6 +135,12 @@ void MainScene::selectLevelCallback(Ref* sender){
 void MainScene::undoCallback(Ref* sender){
 	this->levelManager->undo();
 }
+
+void MainScene::musicCallback(Ref* sender) {
+    // Toggle the music.
+    MusicManager::getInstance().toggleMute();
+}
+
 void MainScene::onLevelComplete()
 {
 	levelManager->completeCurrentLevel();
