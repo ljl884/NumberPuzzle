@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "Common.h"
 #include "MainScene.h"
+#include "LevelSelectionScene.h"
 #include <vector>
 #include <array>
 
@@ -97,7 +98,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
     
     // create a scene. it's an autorelease object
-    auto scene = MainScene::createScene(0);
+//    auto scene = MainScene::createScene(0);
+    auto scene = LevelSelectionScene::createScene(0);
     
     
     // run
