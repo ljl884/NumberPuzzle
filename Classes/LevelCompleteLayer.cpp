@@ -40,6 +40,9 @@ void LevelCompleteLayer::show(){
 	background->runAction(action);
 	label->runAction(action->clone());
 	menu->runAction(action->clone());
+    
+    MusicManager::getInstance().playLevelCompleteEffect();
+    
 }
 void LevelCompleteLayer::hide(){
 	menu->setEnabled(false);

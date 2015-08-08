@@ -49,16 +49,18 @@ void MoveableNumber::update()
 		finished = false;
 		finishContainer->setVisible(false);
 		container->setTexture("frame_0_wrong.png");
-	}
-	if (this->value > 0)
+        MusicManager::getInstance().playNumberMoveInCompleteEffect();
+	} else if (this->value > 0)
 	{
 		finished = false;
 		finishContainer->setVisible(false);
 		container->setTexture("level_incomplete_default.png");
+        MusicManager::getInstance().playNumberMoveInCompleteEffect();
 	}
-	if (this->value == 0)
+	else
 	{
 		finished = true;
 		finishContainer->setVisible(true);
+        MusicManager::getInstance().playNumberMoveCompleteEffect();
 	}
 }

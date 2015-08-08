@@ -28,6 +28,8 @@ protected:
 	int level;
 
 	cocos2d::Point logicPosition;
+    
+    void numberFadeInCallback();
 
 };
 #endif

@@ -57,7 +57,7 @@ Point Table::logicPositionToRealPosition(Point logicPosition)
 	if (abs(lx) > ((TABLE_WIDTH - 1) / 2) ||
 		abs(ly) > ((TABLE_HIGHT - 1) / 2))
 	{
-		return ccp(0,0);
+		return Point(0,0);
 	}
 
 
@@ -65,7 +65,7 @@ Point Table::logicPositionToRealPosition(Point logicPosition)
 	int ry = Constant::Y_ALIGN*ly;
 
 	
-	return ccp(rx, ry);
+	return Point(rx, ry);
 
 }
 
@@ -84,7 +84,8 @@ void Table::addMoveableNumber(int value, Point position){
 	MoveableNumberCount++;
 	number->setPosition(p);
 	number->setLogicPosition(position);
-	number->playAppearAnimation(0.5 + 0.05*MoveableNumberCount);
+	number->playAppearAnimation(0.5 + 0.05 * MoveableNumberCount);
+    
 	this->moveableNumbers.push_back(number);
 	
 }
@@ -102,7 +103,8 @@ void Table::addStaticNumber(int value, int level, Point position){
 	StaticNumberCount++;
 	number->setPosition(p);
 	number->setLogicPosition(position);
-	number->playAppearAnimation(0.7 + 0.03*MoveableNumberCount);
+	number->playAppearAnimation(0.7 + 0.05 * StaticNumberCount);
+    
 	this->staticNumbers.push_back(number);
 	
 }

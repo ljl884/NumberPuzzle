@@ -13,5 +13,6 @@
 #include "Helper.h"
 #include "FontManager.h"
 #include "StyleManager.h"
+#include "MusicManager.h"
 
 #endif /* Common_h */

@@ -14,9 +14,16 @@ Number::Number()
 void Number::playAppearAnimation(float Delay)
 {
 	this->setScale(0.01);
-	this->runAction(Sequence::create(DelayTime::create(Delay), ScaleTo::create(APPEAR_ANIMATION_TIME, SCALE), NULL));
-	
+    
+    auto callback = CallFunc::create( this, callfunc_selector(Number::numberFadeInCallback) );
+    
+	this->runAction(Sequence::create(DelayTime::create(Delay), ScaleTo::create(APPEAR_ANIMATION_TIME, SCALE), callback, NULL));
 }
+
+void Number::numberFadeInCallback() {
+    MusicManager::getInstance().playNumberFadeInEffect();
+}
+
 Size Number::getContainerSize(){
 	return this->container->getContentSize();
 }
