@@ -59,7 +59,7 @@ void MusicManager::resumeBackgroundMusic() {
     if (UserDefault::getInstance()->getBoolForKey(SOUND_ENABLE_KEY, true)) {
         // On simulator, this works but on iPhone device, it doesn't
         #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
-            audioEngine->playBackgroundMusic(BACKGROUND_MUSIC);
+            audioEngine->playBackgroundMusic(BACKGROUND_MUSIC, true);
         #else
             audioEngine->resumeBackgroundMusic();
         #endif
