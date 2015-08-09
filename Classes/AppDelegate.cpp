@@ -44,9 +44,6 @@ void AppDelegate::initGLContextAttrs()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
-    // Let's preload the sounds first
-    MusicManager::getInstance().preload();
-    
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
@@ -94,7 +91,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setContentScaleFactor(scaleFactor);
     FileUtils::getInstance()->addSearchPath(searchPaths.front());
     FileUtils::getInstance()->addSearchPath("res");
+    FileUtils::getInstance()->addSearchPath("fonts");
+    FileUtils::getInstance()->addSearchPath("effects");
     
+    // Let's preload the sounds first
+    MusicManager::getInstance().preload();
+
     // turn on display FPS
     director->setDisplayStats(false);
     

@@ -17,11 +17,6 @@ class FontManager {
     
 public:
     
-    static constexpr const char* BoldFont = "Ubuntu-Bold.ttf";
-    static constexpr const char* RegularFont = "Ubuntu-Regular.ttf";
-    static constexpr const char* MediumFont = "Ubuntu-Medium.ttf";
-    static constexpr const char* LightFont = "Ubuntu-Light.ttf";
-    
     static FontManager& getInstance()
     {
         static FontManager    instance; // Guaranteed to be destroyed.

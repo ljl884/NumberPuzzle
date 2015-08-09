@@ -8,31 +8,36 @@
 
 #include "FontManager.h"
 
+#define BOLD_FONT "fonts/Ubuntu-Bold.ttf"
+#define REGULAR_FONT "fonts/Ubuntu-Regular.ttf"
+#define MEDIUM_FONT "fonts/Ubuntu-Medium.ttf"
+#define LIGHT_FONT "fonts/Ubuntu-Light.ttf"
+
 TTFConfig FontManager::fontConfig(const char *name, int size) {
     
     // Initialize a new TTFConfig struct
-    TTFConfig config;
+    TTFConfig config = TTFConfig(name, size, GlyphCollection::DYNAMIC);
     
-    config.fontFilePath = name;
-    config.fontSize = size;
+//    config.fontFilePath = name;
+//    config.fontSize = size;
     
     return config;
 }
 
 TTFConfig FontManager::regularFontWithSize(int size) {
-    return fontConfig(RegularFont, size);
+    return fontConfig(REGULAR_FONT, size);
 }
 
 TTFConfig FontManager::lightFontWithSize(int size) {
-    return fontConfig(LightFont, size);
+    return fontConfig(LIGHT_FONT, size);
 }
 
 TTFConfig FontManager::boldFontWithSize(int size) {
-    return fontConfig(BoldFont, size);
+    return fontConfig(BOLD_FONT, size);
 }
 
 TTFConfig FontManager::mediumFontWithSize(int size) {
-    return fontConfig(MediumFont, size);
+    return fontConfig(MEDIUM_FONT, size);
 }
 
 TTFConfig FontManager::levelNumberLabelFontConfig() {

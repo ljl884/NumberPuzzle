@@ -7,31 +7,35 @@
 //
 
 #include "MusicManager.h"
-
-using namespace CocosDenshion;
-USING_NS_CC;
+#include "cocos2d.h"
 
 #define SOUND_ENABLE_KEY "sound_enable"
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_BLACKBERRY || CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-    #define NUMBER_MOVE_INCOMPLETE_EFFECT "number_move_incomplete.ogg"
-    #define NUMBER_MOVE_COMPLETE_EFFECT "number_move_complete.ogg"
-    #define LEVEL_COMPLETE_EFFECT "level_complete.ogg"
-    #define BUTTON_SELECTION_EFFECT "button_selection.ogg"
-    #define NUMBER_FADE_IN_EFFECT "number_fade_in.ogg"
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+#define NUMBER_MOVE_INCOMPLETE_EFFECT "number_move_incomplete.mp3"
+#define NUMBER_MOVE_COMPLETE_EFFECT "number_move_complete.mp3"
+#define LEVEL_COMPLETE_EFFECT "level_complete.mp3"
+#define BUTTON_SELECTION_EFFECT "button_selection.mp3"
+#define NUMBER_FADE_IN_EFFECT "number_fade_in.mp3"
 #else
-    #define NUMBER_MOVE_INCOMPLETE_EFFECT "number_move_incomplete.mp3"
-    #define NUMBER_MOVE_COMPLETE_EFFECT "number_move_complete.mp3"
-    #define LEVEL_COMPLETE_EFFECT "level_complete.mp3"
-    #define BUTTON_SELECTION_EFFECT "button_selection.mp3"
-    #define NUMBER_FADE_IN_EFFECT "number_fade_in.mp3"
+#define NUMBER_MOVE_INCOMPLETE_EFFECT "effects/number_move_incomplete.ogg"
+#define NUMBER_MOVE_COMPLETE_EFFECT "effects/number_move_complete.ogg"
+#define LEVEL_COMPLETE_EFFECT "effects/level_complete.ogg"
+#define BUTTON_SELECTION_EFFECT "effects/button_selection.ogg"
+#define NUMBER_FADE_IN_EFFECT "effects/number_fade_in.ogg"
 #endif
 
 #define BACKGROUND_MUSIC "background.mp3"
 
+using namespace CocosDenshion;
+USING_NS_CC;
+
 SimpleAudioEngine *MusicManager::audioEngine = SimpleAudioEngine::getInstance();
 
 void MusicManager::preload() {
+    
+    CCLOG("Currrent path of effects: %s", NUMBER_MOVE_INCOMPLETE_EFFECT);
+    
     audioEngine->preloadBackgroundMusic(BACKGROUND_MUSIC);
     audioEngine->preloadEffect(NUMBER_MOVE_COMPLETE_EFFECT);
     audioEngine->preloadEffect(NUMBER_MOVE_INCOMPLETE_EFFECT);

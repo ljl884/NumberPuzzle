@@ -9,7 +9,6 @@
 #ifndef MusicManager_h
 #define MusicManager_h
 
-#include "cocos2d.h"
 #include <SimpleAudioEngine.h>
 
 class MusicManager {
