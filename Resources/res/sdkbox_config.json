@@ -1,0 +1,12 @@
+{
+    "ios": {
+        "FlurryAnalytics": {
+            "APIKey": "WF3W7GW4NWB6KG3K7Z9F",
+            "AppVersion": "V0.1",
+            "Debug": true,
+            "Level": 2,
+            "SessionTimeout": 10,
+            "CrashReport": true
+        }
+    }
+}

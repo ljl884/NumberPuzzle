@@ -14,5 +14,6 @@
 #include "FontManager.h"
 #include "StyleManager.h"
 #include "MusicManager.h"
+#include "AnalyticsManager.h"
 
 #endif /* Common_h */

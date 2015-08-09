@@ -131,6 +131,9 @@ void MainScene::backLevelCallback(Ref* sender){
 }
 void MainScene::selectLevelCallback(Ref* sender){
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5,LevelSelectionScene::createScene()));
+    
+    // Whoops, the user gave up the level.
+    AnalyticsManager::getInstance().levelEnded(levelNumberLabel->getString(), false);
 }
 void MainScene::undoCallback(Ref* sender){
 	this->levelManager->undo();
@@ -146,9 +149,16 @@ void MainScene::onLevelComplete()
 	levelManager->completeCurrentLevel();
     levelCompleteMask->show();
 	levelCompleteLayer->show();
+    
+    // Wow, the user completed the level successfully. We terminate the level time spent event.
+    AnalyticsManager::getInstance().levelEnded(levelNumberLabel->getString(), true);
 }
 void MainScene::setLevelNumber(int levelNumber){
 	levelNumberLabel->setString(Helper::int2str(levelNumber));
+    
+    // We log the level start event as a timed event, so that
+    // we can estimate how long the user spend on the level.
+    AnalyticsManager::getInstance().levelStarted(levelNumberLabel->getString());
 }
 void MainScene::playLevel(int levelNumber){
 	this->levelManager->runLevel(levelNumber);

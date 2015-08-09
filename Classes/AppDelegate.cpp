@@ -44,11 +44,14 @@ void AppDelegate::initGLContextAttrs()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
+    // Let's preload the sounds first
+    MusicManager::getInstance().preload();
+    
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::createWithRect("NumberPuzzle", Rect(0, 0, 1920, 1080));
+        glview = GLViewImpl::createWithRect("NumberPuzzle", Rect(0, 0, 960, 640));
         director->setOpenGLView(glview);
     }
     
@@ -90,6 +93,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     director->setContentScaleFactor(scaleFactor);
     FileUtils::getInstance()->addSearchPath(searchPaths.front());
+    FileUtils::getInstance()->addSearchPath("res");
     
     // turn on display FPS
     director->setDisplayStats(false);
@@ -101,12 +105,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
 //    auto scene = MainScene::createScene(0);
     auto scene = LevelSelectionScene::createScene(0);
     
+    MusicManager::getInstance().playBackgroundMusic();
     
     // run
     director->runWithScene(scene);
     
-    MusicManager::getInstance().preload();
-    MusicManager::getInstance().playBackgroundMusic();
+    // Start Flurry Analytics Session
+    AnalyticsManager::getInstance().init();
+    AnalyticsManager::getInstance().startSession();
     
     return true;
 }
