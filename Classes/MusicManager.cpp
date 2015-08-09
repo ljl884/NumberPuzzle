@@ -50,17 +50,26 @@ void MusicManager::playBackgroundMusic() {
 }
 
 void MusicManager::pauseBackgroundMusic() {
-    audioEngine->pauseBackgroundMusic();
-}
-
-void MusicManager::stopBackgroundMusic() {
-    if (UserDefault::getInstance()->getBoolForKey(SOUND_ENABLE_KEY, true)) {
-        audioEngine->stopBackgroundMusic();
+    if (audioEngine->isBackgroundMusicPlaying()) {
+        audioEngine->pauseBackgroundMusic();
     }
 }
 
 void MusicManager::resumeBackgroundMusic() {
-    audioEngine->resumeBackgroundMusic();
+    if (UserDefault::getInstance()->getBoolForKey(SOUND_ENABLE_KEY, true)) {
+        // On simulator, this works but on iPhone device, it doesn't
+        #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+            audioEngine->playBackgroundMusic(BACKGROUND_MUSIC);
+        #else
+            audioEngine->resumeBackgroundMusic();
+        #endif
+    }
+}
+
+void MusicManager::stopBackgroundMusic() {
+    if (audioEngine->isBackgroundMusicPlaying()) {
+        audioEngine->stopBackgroundMusic();
+    }
 }
 
 void MusicManager::playNumberMoveCompleteEffect() {
