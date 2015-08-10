@@ -23,6 +23,7 @@ public:
     
     void init();
     void startSession();
+    void endSession();
     void levelStarted(const std::string levelNumber);
     void levelEnded(const std::string levelNumber, bool completed);
     

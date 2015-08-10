@@ -13,7 +13,7 @@
 #define LEVEL_NUMBER_KEY "level_number"
 #define LEVEL_COMPLETE_KEY "level_complete"
 
-#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     #include "PluginFlurryAnalytics/PluginFlurryAnalytics.h"
 
     void AnalyticsManager::init() {
@@ -28,6 +28,12 @@
         // We'll send the report everytime the user move the session to background.
         sdkbox::PluginFlurryAnalytics::setSessionReportsOnPauseEnabled(true);
         sdkbox::PluginFlurryAnalytics::setSessionReportsOnCloseEnabled(true);
+    }
+
+    void AnalyticsManager::endSession() {
+		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    		sdkbox::PluginFlurryAnalytics::endSession();
+		#endif
     }
 
     void AnalyticsManager::levelEnded(const std::string levelNumber, bool completed) {
@@ -53,11 +59,6 @@
         sdkbox::PluginFlurryAnalytics::logEvent(LEVEL_TIME_SPEND_EVENT_NAME, logParameters, true);
     }
 
-#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
-    void AnalyticsManager::init() {}
-    void AnalyticsManager::startSession() {}
-    void AnalyticsManager::levelStarted(const std::string levelNumber) {}
-    void AnalyticsManager::levelEnded(const std::string levelNumber, bool completed) {}
 #else
     void AnalyticsManager::init() {}
     void AnalyticsManager::startSession() {}

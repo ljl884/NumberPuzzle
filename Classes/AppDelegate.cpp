@@ -125,6 +125,9 @@ void AppDelegate::applicationDidEnterBackground() {
     
     // if you use SimpleAudioEngine, it must be pause
     MusicManager::getInstance().pauseBackgroundMusic();
+
+    // This should be called. However, it will only have effect on Android.
+    AnalyticsManager::getInstance().endSession();
 }
 
 // this function will be called when the app is active again
@@ -133,4 +136,9 @@ void AppDelegate::applicationWillEnterForeground() {
     
     // if you use SimpleAudioEngine, it must resume here
     MusicManager::getInstance().resumeBackgroundMusic();
+
+    // Only do this on Android.
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    	AnalyticsManager::getInstance().startSession();
+	#endif
 }
