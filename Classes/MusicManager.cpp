@@ -11,18 +11,20 @@
 
 #define SOUND_ENABLE_KEY "sound_enable"
 
-#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
-#define NUMBER_MOVE_INCOMPLETE_EFFECT "number_move_incomplete.mp3"
-#define NUMBER_MOVE_COMPLETE_EFFECT "number_move_complete.mp3"
-#define LEVEL_COMPLETE_EFFECT "level_complete.mp3"
-#define BUTTON_SELECTION_EFFECT "button_selection.mp3"
-#define NUMBER_FADE_IN_EFFECT "number_fade_in.mp3"
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    #define NUMBER_MOVE_INCOMPLETE_EFFECT "effects/number_move_incomplete.ogg"
+    #define NUMBER_MOVE_COMPLETE_EFFECT "effects/number_move_complete.ogg"
+    #define LEVEL_COMPLETE_EFFECT "effects/level_complete.ogg"
+    #define BUTTON_SELECTION_EFFECT "effects/button_selection.ogg"
+    #define NUMBER_FADE_IN_EFFECT "effects/number_fade_in.ogg"
 #else
-#define NUMBER_MOVE_INCOMPLETE_EFFECT "effects/number_move_incomplete.ogg"
-#define NUMBER_MOVE_COMPLETE_EFFECT "effects/number_move_complete.ogg"
-#define LEVEL_COMPLETE_EFFECT "effects/level_complete.ogg"
-#define BUTTON_SELECTION_EFFECT "effects/button_selection.ogg"
-#define NUMBER_FADE_IN_EFFECT "effects/number_fade_in.ogg"
+
+    #define NUMBER_MOVE_INCOMPLETE_EFFECT "number_move_incomplete.mp3"
+    #define NUMBER_MOVE_COMPLETE_EFFECT "number_move_complete.mp3"
+    #define LEVEL_COMPLETE_EFFECT "level_complete.mp3"
+    #define BUTTON_SELECTION_EFFECT "button_selection.mp3"
+    #define NUMBER_FADE_IN_EFFECT "number_fade_in.mp3"
+
 #endif
 
 #define BACKGROUND_MUSIC "background.mp3"
