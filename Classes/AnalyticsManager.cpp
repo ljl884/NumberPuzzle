@@ -62,6 +62,7 @@
 #else
     void AnalyticsManager::init() {}
     void AnalyticsManager::startSession() {}
+    void AnalyticsManager::endSession() {}
     void AnalyticsManager::levelStarted(const std::string levelNumber) {}
     void AnalyticsManager::levelEnded(const std::string levelNumber, bool completed) {}
 #endif

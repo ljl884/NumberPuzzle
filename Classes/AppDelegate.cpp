@@ -25,8 +25,8 @@ typedef struct tagResource
 } Resource;
 
 // Define all our resource types and locations
-static Resource largeResource  =  { Size(1920, 1080), Size(1024, 768), "UHD"};
-static Resource mediumResource =  { Size(1024, 768), Size(750, 544),  "HD" };
+static Resource largeResource  =  { Size(1440, 960), Size(1200, 800), "UHD"};
+static Resource mediumResource =  { Size(960, 640), Size(720, 480),  "HD" };
 static Resource smallResource  =  { Size(480, 320), Size(0, 0),   "SD" };
 
 // Declare an array containing the resource descriptions, from largest to smallest
@@ -48,7 +48,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::createWithRect("NumberPuzzle", Rect(0, 0, 960, 640));
+        glview = GLViewImpl::createWithRect("NumberPuzzle", Rect(0, 0, 1280, 960));
         director->setOpenGLView(glview);
     }
     
@@ -74,15 +74,19 @@ bool AppDelegate::applicationDidFinishLaunching() {
             // Add this directory to the search path
             searchPaths.push_back(resource.directory);
             CCLOG("searching in %s", resource.directory);
-            // If we haven't already determined the scale factor, calculated it based on this resources resolution
+            // If we haven't already determined the scale factor, calculated it based on this resources resolution. This would equal to
+            // 2.0 for 1920, 1.0 for 960, 0.5 for 480
             if (scaleFactor == -1)
                 scaleFactor = resource.size.width / Constant::designResolutionSize.width;
             
             float heightScale = frameSize.height / Constant::designResolutionSize.height / scaleFactor;
             float widthScale = frameSize.width / Constant::designResolutionSize.width / scaleFactor;
-            Constant::frameRatioSize = Size(widthScale, heightScale);
-			Constant::X_ALIGN *= 1 / Constant::frameRatioSize.width;
-			Constant::Y_ALIGN *= 1 / Constant::frameRatioSize.height;
+            Constant::frameRatioSize = Size(heightScale / widthScale, 1);
+            Size ratio = Constant::frameRatioSize;
+            
+            // We scale x direction only.
+			Constant::X_ALIGN *= ratio.width / ratio.height;
+			Constant::Y_ALIGN *= 1;
             
             break;
         }
