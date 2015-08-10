@@ -48,7 +48,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::createWithRect("NumberPuzzle", Rect(0, 0, 1280, 960));
+        glview = GLViewImpl::createWithRect("NumberPuzzle", Rect(0, 0, 1920, 1080));
         director->setOpenGLView(glview);
     }
     

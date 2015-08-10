@@ -97,14 +97,12 @@ bool LevelSelectionScene::init(int pageNumber)
             
             numberItem->setPosition(180 + j * 140, 500 - i * 140);
             menu->addChild(numberItem);
-            
-            Helper::scaleSpriteAndChildren(numberItem);
         }
     }
     
     MenuItemImage* nextPageItem = MenuItemImage::create("next_page_default.png", "next_page_selected.png", CC_CALLBACK_1(LevelSelectionScene::onNextPageCallback, this));
     menu->addChild(nextPageItem);
-    nextPageItem->setPosition(600, 50);
+    nextPageItem->setPosition(530, 50);
     
     // If this page is the last page, we certainly not want to enable this button;)
     if (pageNumber >= maximumPageNumber - 1) {
@@ -113,7 +111,7 @@ bool LevelSelectionScene::init(int pageNumber)
     
     MenuItemImage* lastPageItem = MenuItemImage::create("last_page_default.png", "last_page_selected.png", CC_CALLBACK_1(LevelSelectionScene::onLastPageCallback, this));
     menu->addChild(lastPageItem);
-    lastPageItem->setPosition(400, 50);
+    lastPageItem->setPosition(405, 50);
     
     // If this page is the first page, we certainly not want to enable this button;)
     if (pageNumber == 0) {
@@ -122,6 +120,8 @@ bool LevelSelectionScene::init(int pageNumber)
     
     this->addChild(menu);
     menu->setPosition(0, 0);
+    
+    Helper::scaleSpriteAndChildren(menu);
     
     // CCLOG("Current page number: %d : %d", pageNumber, maximumPageNumber);
     

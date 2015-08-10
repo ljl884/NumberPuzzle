@@ -9,6 +9,7 @@
 #include "LevelManager.h"
 #include "LevelCompleteLayer.h"
 #include "CoverLayer.h"
+#include "Tutorial.h"
 
 USING_NS_CC;
 
@@ -155,6 +156,33 @@ void MainScene::onLevelComplete()
 }
 void MainScene::setLevelNumber(int levelNumber){
 	levelNumberLabel->setString(Helper::int2str(levelNumber));
+    
+    // We will run the Tutorial if it's the first two levels
+    
+    if (tutorialLayer != nullptr) {
+        this->removeChild(tutorialLayer);
+        tutorialLayer = nullptr;
+    }
+    
+    if (levelNumber <= 2) {
+        
+        tutorialLayer = Tutorial::create();
+        tutorialLayer->setPosition(480, 320);
+        
+        this->addChild(tutorialLayer, 5);
+        
+        Helper::scaleSpriteAndChildren(tutorialLayer);
+        
+        if (levelNumber == 1) {
+            CCLOG("Level one Tutorial");
+            
+            tutorialLayer->TutorialOne();
+        } else {
+            CCLOG("Level two Tutorial");
+            
+            tutorialLayer->TutorialTwo();
+        }
+    }
     
     // We log the level start event as a timed event, so that
     // we can estimate how long the user spend on the level.

@@ -6,6 +6,7 @@
 class LevelManager;
 class LevelCompleteLayer;
 class CoverLayer;
+class Tutorial;
 
 #define DEBUG false
 
@@ -35,6 +36,7 @@ private:
     CoverLayer* levelCompleteMask;
 	cocos2d::Label* levelNumberLabel;
     cocos2d::MenuItemToggle *musicItem;
+    Tutorial *tutorialLayer;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
