@@ -33,9 +33,6 @@ USING_NS_CC;
 SimpleAudioEngine *MusicManager::audioEngine = SimpleAudioEngine::getInstance();
 
 void MusicManager::preload() {
-    
-    CCLOG("Currrent path of effects: %s", NUMBER_MOVE_INCOMPLETE_EFFECT);
-    
     audioEngine->preloadBackgroundMusic(BACKGROUND_MUSIC);
     audioEngine->preloadEffect(NUMBER_MOVE_COMPLETE_EFFECT);
     audioEngine->preloadEffect(NUMBER_MOVE_INCOMPLETE_EFFECT);

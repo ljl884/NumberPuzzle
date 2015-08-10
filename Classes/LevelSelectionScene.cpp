@@ -98,7 +98,7 @@ bool LevelSelectionScene::init(int pageNumber)
             numberItem->setPosition(180 + j * 140, 500 - i * 140);
             menu->addChild(numberItem);
             
-            Helper::scaleSpriteAndChildren(number);
+            Helper::scaleSpriteAndChildren(numberItem);
         }
     }
     

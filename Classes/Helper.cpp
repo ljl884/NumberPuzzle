@@ -36,8 +36,8 @@ void Helper::split(const string& src, const string& separator, vector<string>& d
 
 void Helper::scaleSprite(Node *sprite) {
     Size ratio = Constant::frameRatioSize;
-	sprite->setScaleY(1 / ratio.height);
-	sprite->setScaleX(1 / ratio.width);
+	sprite->setScaleY(1 / ratio.height * ratio.width / ratio.height);
+	sprite->setScaleX(1 / ratio.width * ratio.width / ratio.height);
 }
 
 void Helper::scaleSpriteAndChildren(Node *sprite) {

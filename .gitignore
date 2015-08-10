@@ -35,3 +35,4 @@ proj.win32/
 *.app
 NumberPuzzle.ccs
 NumberPuzzle.cfg
+proj.androidstudio

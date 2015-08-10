@@ -93,7 +93,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     FileUtils::getInstance()->addSearchPath("res");
     FileUtils::getInstance()->addSearchPath("fonts");
     FileUtils::getInstance()->addSearchPath("effects");
-    
+
     // Let's preload the sounds first
     MusicManager::getInstance().preload();
 
