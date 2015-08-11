@@ -2,7 +2,7 @@
     "android": {
         "FlurryAnalytics": {
             "APIKey": "WF3W7GW4NWB6KG3K7Z9F",
-            "AppVersion": "V0.1",
+            "AppVersion": "V1.0",
             "CrashReport": true,
             "Level": 2,
             "Debug": true,
@@ -14,7 +14,7 @@
     "ios": {
         "FlurryAnalytics": {
             "APIKey": "WF3W7GW4NWB6KG3K7Z9F",
-            "AppVersion": "V0.1",
+            "AppVersion": "V1.0",
             "Debug": true,
             "Level": 2,
             "SessionTimeout": 10,

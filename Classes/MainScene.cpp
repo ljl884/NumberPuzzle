@@ -174,12 +174,8 @@ void MainScene::setLevelNumber(int levelNumber){
         Helper::scaleSpriteAndChildren(tutorialLayer);
         
         if (levelNumber == 1) {
-            CCLOG("Level one Tutorial");
-            
             tutorialLayer->TutorialOne();
         } else {
-            CCLOG("Level two Tutorial");
-            
             tutorialLayer->TutorialTwo();
         }
     }
