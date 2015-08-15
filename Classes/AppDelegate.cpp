@@ -117,8 +117,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->runWithScene(scene);
     
     // Start Flurry Analytics Session
-    AnalyticsManager::getInstance().init();
-    AnalyticsManager::getInstance().startSession();
+    //AnalyticsManager::getInstance().init();
+    //AnalyticsManager::getInstance().startSession();
     
     return true;
 }
@@ -131,7 +131,7 @@ void AppDelegate::applicationDidEnterBackground() {
     MusicManager::getInstance().pauseBackgroundMusic();
 
     // This should be called. However, it will only have effect on Android.
-    AnalyticsManager::getInstance().endSession();
+    //AnalyticsManager::getInstance().endSession();
 }
 
 // this function will be called when the app is active again
@@ -143,6 +143,6 @@ void AppDelegate::applicationWillEnterForeground() {
 
     // Only do this on Android.
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    	AnalyticsManager::getInstance().startSession();
+    	//AnalyticsManager::getInstance().startSession();
 	#endif
 }

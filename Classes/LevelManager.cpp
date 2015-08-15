@@ -1,6 +1,7 @@
 #include "LevelManager.h"
 #include "Common.h"
 #include "MainScene.h"
+#include <iterator>
 
 using namespace std;
 
